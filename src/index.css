@@ -6,82 +6,82 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0% 0%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 0%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 0%;
 
-    --primary: 221 83% 53%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 0%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 0%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221 83% 53%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 0%;
 
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-foreground: 0 0% 25%;
+    --sidebar-primary: 0 0% 10%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 10%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 0 0% 0%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 80%;
     
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 0 0% 80%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 0 0% 80%;
   }
 }
 
@@ -97,15 +97,15 @@
 
 @layer components {
   .auth-input {
-    @apply h-12 w-full rounded-xl border-gray-300 bg-white/80 px-4 text-black shadow-sm backdrop-blur-sm focus:border-mechanic-blue focus:ring-mechanic-blue dark:bg-white/10 dark:text-white dark:backdrop-blur-md dark:placeholder:text-gray-400;
+    @apply h-12 w-full rounded-xl border-gray-300 bg-white/80 px-4 text-black shadow-sm backdrop-blur-sm focus:border-black focus:ring-black dark:bg-white/10 dark:text-white dark:backdrop-blur-md dark:placeholder:text-gray-400;
   }
 
   .auth-btn {
-    @apply h-12 w-full rounded-xl bg-gradient-to-r from-mechanic-blue to-blue-500 text-white font-medium shadow-md hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center;
+    @apply h-12 w-full rounded-xl bg-black text-white font-medium shadow-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-all duration-200 flex items-center justify-center;
   }
 
   .auth-btn-outline {
-    @apply h-12 w-full rounded-xl border border-gray-300 bg-white/80 backdrop-blur-sm text-gray-700 font-medium shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-mechanic-blue focus:ring-offset-2 transition-all duration-200 dark:bg-black/30 dark:text-white dark:border-gray-600 dark:hover:bg-black/40 flex items-center justify-center;
+    @apply h-12 w-full rounded-xl border border-gray-300 bg-white/80 backdrop-blur-sm text-gray-700 font-medium shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-all duration-200 dark:bg-black/30 dark:text-white dark:border-gray-600 dark:hover:bg-black/40 flex items-center justify-center;
   }
 
   .auth-card {
@@ -113,18 +113,18 @@
   }
 
   .auth-container {
-    @apply flex min-h-screen flex-col items-center justify-center p-4 bg-gradient-to-b from-white to-gray-100 dark:from-mechanic-dark dark:to-black bg-auth-bg bg-cover bg-center bg-no-repeat;
+    @apply flex min-h-screen flex-col items-center justify-center p-4 bg-gradient-to-b from-white to-gray-100 dark:from-black dark:to-gray-900 bg-auth-bg bg-cover bg-center bg-no-repeat;
   }
 
   .floating-btn {
-    @apply fixed bottom-8 right-8 h-14 w-14 rounded-full bg-mechanic-blue text-white shadow-lg flex items-center justify-center hover:scale-105 transition-all duration-200;
+    @apply fixed bottom-8 right-8 h-14 w-14 rounded-full bg-black text-white shadow-lg flex items-center justify-center hover:scale-105 transition-all duration-200;
   }
 
   .role-btn {
-    @apply flex flex-col items-center justify-center p-6 rounded-xl border-2 border-transparent bg-white/80 backdrop-blur-sm shadow-md hover:border-mechanic-blue transition-all duration-200 cursor-pointer dark:bg-black/30 dark:hover:border-mechanic-blue;
+    @apply flex flex-col items-center justify-center p-6 rounded-xl border-2 border-transparent bg-white/80 backdrop-blur-sm shadow-md hover:border-black transition-all duration-200 cursor-pointer dark:bg-black/30 dark:hover:border-white;
   }
 
   .role-btn.active {
-    @apply border-mechanic-blue bg-blue-50 dark:bg-blue-900/30;
+    @apply border-black bg-gray-50 dark:bg-gray-900/30 dark:border-white;
   }
 }

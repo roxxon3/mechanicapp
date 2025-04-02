@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "@/components/ThemeToggle";
-import { ArrowRight, Car, Tools, Wrench } from "lucide-react";
+import { ArrowRight, Car, Wrench } from "lucide-react";
 
 const Index = () => {
   return (
@@ -19,7 +19,7 @@ const Index = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10 mb-12">
             <div className="auth-card p-6 flex flex-col items-center">
-              <Car size={48} className="text-mechanic-blue mb-4" />
+              <Car size={48} className="text-black dark:text-white mb-4" />
               <h2 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">
                 Vehicle Owner
               </h2>
@@ -32,7 +32,7 @@ const Index = () => {
             </div>
             
             <div className="auth-card p-6 flex flex-col items-center">
-              <Wrench size={48} className="text-mechanic-blue mb-4" />
+              <Wrench size={48} className="text-black dark:text-white mb-4" />
               <h2 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">
                 Mechanic
               </h2>
