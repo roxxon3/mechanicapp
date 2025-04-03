@@ -8,9 +8,11 @@ import {
   LogOut, Search, ChevronLeft
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
+import { useAuth } from "@/context/AuthContext";
 
 const UserDashboard = () => {
-  const [userName, setUserName] = useState("John");
+  const { userName, getUnreadCount } = useAuth();
+  const unreadCount = getUnreadCount();
   
   return (
     <div className="min-h-screen bg-white dark:bg-black">
@@ -106,8 +108,13 @@ const UserDashboard = () => {
             <History size={20} className="text-gray-500 dark:text-gray-400" />
             <span className="text-xs mt-1 text-gray-500 dark:text-gray-400">History</span>
           </Link>
-          <Link to="/messages" className="flex flex-col items-center p-2">
+          <Link to="/notifications" className="flex flex-col items-center p-2 relative">
             <MessageSquare size={20} className="text-gray-500 dark:text-gray-400" />
+            {unreadCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                {unreadCount}
+              </span>
+            )}
             <span className="text-xs mt-1 text-gray-500 dark:text-gray-400">Messages</span>
           </Link>
           <Link to="/payments" className="flex flex-col items-center p-2">

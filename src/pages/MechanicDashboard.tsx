@@ -8,10 +8,12 @@ import {
   UserCheck, Briefcase, ChevronLeft, ToggleLeft
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
+import { useAuth } from "@/context/AuthContext";
 
 const MechanicDashboard = () => {
-  const [mechanicName, setMechanicName] = useState("Mike");
+  const { userName, getUnreadCount } = useAuth();
   const [isOnline, setIsOnline] = useState(true);
+  const unreadCount = getUnreadCount();
   
   const toggleStatus = () => {
     setIsOnline(!isOnline);
@@ -29,7 +31,7 @@ const MechanicDashboard = () => {
               <Wrench size={20} className="text-black dark:text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-black dark:text-white">Hi, {mechanicName}</h1>
+              <h1 className="text-xl font-bold text-black dark:text-white">Hi, {userName}</h1>
               <p className="text-sm text-gray-600 dark:text-gray-400">Mechanic</p>
             </div>
           </div>
@@ -132,13 +134,18 @@ const MechanicDashboard = () => {
             <Briefcase size={20} className="text-gray-500 dark:text-gray-400" />
             <span className="text-xs mt-1 text-gray-500 dark:text-gray-400">Jobs</span>
           </Link>
-          <Link to="/notifications" className="flex flex-col items-center p-2">
+          <Link to="/notifications" className="flex flex-col items-center p-2 relative">
+            <MessageSquare size={20} className="text-gray-500 dark:text-gray-400" />
+            {unreadCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                {unreadCount}
+              </span>
+            )}
+            <span className="text-xs mt-1 text-gray-500 dark:text-gray-400">Messages</span>
+          </Link>
+          <Link to="/alerts" className="flex flex-col items-center p-2">
             <BellRing size={20} className="text-gray-500 dark:text-gray-400" />
             <span className="text-xs mt-1 text-gray-500 dark:text-gray-400">Alerts</span>
-          </Link>
-          <Link to="/messages" className="flex flex-col items-center p-2">
-            <MessageSquare size={20} className="text-gray-500 dark:text-gray-400" />
-            <span className="text-xs mt-1 text-gray-500 dark:text-gray-400">Messages</span>
           </Link>
         </div>
       </div>
