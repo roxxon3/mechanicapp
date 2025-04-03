@@ -7,6 +7,7 @@ import SocialAuth from "@/components/SocialAuth";
 import RoleSelector from "@/components/RoleSelector";
 import { ArrowRight, Mail, Phone, User, Lock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/context/AuthContext";
 
 const SignupPage = () => {
   const [name, setName] = useState("");
@@ -18,6 +19,7 @@ const SignupPage = () => {
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { login } = useAuth();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,11 +34,21 @@ const SignupPage = () => {
       // Simulate signup process
       setTimeout(() => {
         setIsLoading(false);
+        
+        // Log the user in with the selected role
+        login(role);
+        
         toast({
           title: "Account created",
           description: "Welcome to Mechanic Hub!",
         });
-        navigate("/dashboard");
+        
+        // Redirect based on role
+        if (role === "mechanic") {
+          navigate("/mechanic-dashboard");
+        } else {
+          navigate("/user-dashboard");
+        }
       }, 1500);
     }
   };

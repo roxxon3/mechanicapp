@@ -4,8 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthLayout from "@/components/AuthLayout";
 import AuthInput from "@/components/AuthInput";
 import SocialAuth from "@/components/SocialAuth";
-import { ArrowRight, Mail, Phone, User } from "lucide-react";
+import { ArrowRight, Mail, Phone, User, Lock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/context/AuthContext";
 
 const LoginPage = () => {
   const [loginMethod, setLoginMethod] = useState<"email" | "phone">("email");
@@ -16,6 +17,7 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { login } = useAuth();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,11 +26,24 @@ const LoginPage = () => {
     // Simulate authentication process
     setTimeout(() => {
       setIsLoading(false);
+      
+      // For demonstration, we'll determine the role based on the email
+      // In a real app, this would come from your backend
+      const userRole = email.includes("mechanic") ? "mechanic" : "user";
+      
+      login(userRole);
+      
       toast({
         title: "Login successful",
         description: "Welcome back to Mechanic Hub!",
       });
-      navigate("/dashboard");
+      
+      // Redirect based on role
+      if (userRole === "mechanic") {
+        navigate("/mechanic-dashboard");
+      } else {
+        navigate("/user-dashboard");
+      }
     }, 1500);
   };
 
