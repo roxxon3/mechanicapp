@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,14 +62,6 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				},
-				spotify: {
-					green: '#1DB954',
-					black: '#191414',
-					gray: '#121212',
-					light: '#282828',
-					text: '#B3B3B3',
-					white: '#FFFFFF',
 				},
 				uber: {
 					black: '#000000',
@@ -144,7 +137,6 @@ export default {
 			},
 			backgroundImage: {
 				'auth-bg': "url('/lovable-uploads/8d39fab9-bd57-4033-92aa-8290298b74fa.png')",
-				'gradient-spotify': 'linear-gradient(to bottom, #1DB954, #191414)',
 				'gradient-uber': 'linear-gradient(to bottom, #276EF1, #000000)',
 			},
 			fontSize: {
