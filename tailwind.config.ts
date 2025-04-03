@@ -64,10 +64,10 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				mechanic: {
-					blue: '#000000',
-					dark: '#000000',
-					yellow: '#000000',
-					gray: '#222222',
+					blue: '#2563eb',
+					dark: '#1e3a8a',
+					yellow: '#eab308',
+					gray: '#4b5563',
 				}
 			},
 			borderRadius: {
@@ -111,6 +111,14 @@ export default {
 						opacity: '0',
 						transform: 'translateY(10px)'
 					}
+				},
+				'pulse-subtle': {
+					'0%, 100%': {
+						opacity: '1'
+					},
+					'50%': {
+						opacity: '0.8'
+					}
 				}
 			},
 			animation: {
@@ -118,9 +126,15 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.3s ease-out',
 				'fade-out': 'fade-out 0.3s ease-out',
+				'pulse-subtle': 'pulse-subtle 2s ease-in-out infinite'
 			},
 			backgroundImage: {
 				'auth-bg': "url('/lovable-uploads/8d39fab9-bd57-4033-92aa-8290298b74fa.png')"
+			},
+			fontSize: {
+				'base': '1rem',
+				'xl': '1.25rem',
+				'2xl': '1.5rem',
 			}
 		}
 	},

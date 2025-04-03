@@ -92,20 +92,34 @@
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight;
+  }
+
+  p, ul, ol {
+    @apply leading-relaxed;
+  }
+
+  /* Improve focus styles for better accessibility */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-blue-600 dark:outline-blue-500;
   }
 }
 
 @layer components {
   .auth-input {
-    @apply h-12 w-full rounded-xl border-gray-300 bg-white/80 px-4 text-black shadow-sm backdrop-blur-sm focus:border-black focus:ring-black dark:bg-white/10 dark:text-white dark:backdrop-blur-md dark:placeholder:text-gray-400;
+    @apply h-12 w-full rounded-xl border-gray-300 bg-white/80 px-4 text-black shadow-sm backdrop-blur-sm focus:border-mechanic-blue focus:ring-mechanic-blue text-base dark:bg-white/10 dark:text-white dark:backdrop-blur-md dark:placeholder:text-gray-400;
   }
 
   .auth-btn {
-    @apply h-12 w-full rounded-xl bg-black text-white font-medium shadow-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-all duration-200 flex items-center justify-center;
+    @apply h-12 w-full rounded-xl bg-mechanic-blue text-white font-medium shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center text-base;
   }
 
   .auth-btn-outline {
-    @apply h-12 w-full rounded-xl border border-gray-300 bg-white/80 backdrop-blur-sm text-gray-700 font-medium shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-all duration-200 dark:bg-black/30 dark:text-white dark:border-gray-600 dark:hover:bg-black/40 flex items-center justify-center;
+    @apply h-12 w-full rounded-xl border border-gray-300 bg-white/80 backdrop-blur-sm text-gray-700 font-medium shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 transition-all duration-200 dark:bg-black/30 dark:text-white dark:border-gray-600 dark:hover:bg-black/40 flex items-center justify-center text-base;
   }
 
   .auth-card {
@@ -117,14 +131,22 @@
   }
 
   .floating-btn {
-    @apply fixed bottom-8 right-8 h-14 w-14 rounded-full bg-black text-white shadow-lg flex items-center justify-center hover:scale-105 transition-all duration-200;
+    @apply fixed bottom-8 right-8 h-14 w-14 rounded-full bg-mechanic-blue text-white shadow-lg flex items-center justify-center hover:scale-105 transition-all duration-200;
   }
 
   .role-btn {
-    @apply flex flex-col items-center justify-center p-6 rounded-xl border-2 border-transparent bg-white/80 backdrop-blur-sm shadow-md hover:border-black transition-all duration-200 cursor-pointer dark:bg-black/30 dark:hover:border-white;
+    @apply flex flex-col items-center justify-center p-6 rounded-xl border-2 border-transparent bg-white/80 backdrop-blur-sm shadow-md hover:border-mechanic-blue transition-all duration-200 cursor-pointer dark:bg-black/30 dark:hover:border-blue-500;
   }
 
   .role-btn.active {
-    @apply border-black bg-gray-50 dark:bg-gray-900/30 dark:border-white;
+    @apply border-mechanic-blue bg-blue-50 dark:bg-gray-900/30 dark:border-blue-500;
+  }
+
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-md hover:translate-y-[-2px];
+  }
+
+  .icon-button {
+    @apply flex items-center justify-center p-2 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors;
   }
 }
