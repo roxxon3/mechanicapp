@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -63,8 +62,23 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
+				spotify: {
+					green: '#1DB954',
+					black: '#191414',
+					gray: '#121212',
+					light: '#282828',
+					text: '#B3B3B3',
+					white: '#FFFFFF',
+				},
+				uber: {
+					black: '#000000',
+					white: '#FFFFFF',
+					gray: '#F6F6F6',
+					blue: '#276EF1',
+					green: '#05A357',
+				},
 				mechanic: {
-					blue: '#2563eb',
+					blue: '#276EF1',
 					dark: '#1e3a8a',
 					yellow: '#eab308',
 					gray: '#4b5563',
@@ -129,7 +143,9 @@ export default {
 				'pulse-subtle': 'pulse-subtle 2s ease-in-out infinite'
 			},
 			backgroundImage: {
-				'auth-bg': "url('/lovable-uploads/8d39fab9-bd57-4033-92aa-8290298b74fa.png')"
+				'auth-bg': "url('/lovable-uploads/8d39fab9-bd57-4033-92aa-8290298b74fa.png')",
+				'gradient-spotify': 'linear-gradient(to bottom, #1DB954, #191414)',
+				'gradient-uber': 'linear-gradient(to bottom, #276EF1, #000000)',
 			},
 			fontSize: {
 				'base': '1rem',

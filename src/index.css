@@ -14,7 +14,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 0%;
 
-    --primary: 0 0% 0%;
+    --primary: 142 71% 45%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 96%;
@@ -23,21 +23,21 @@
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
 
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 0%;
+    --accent: 142 71% 45%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 0 0% 90%;
     --input: 0 0% 90%;
-    --ring: 0 0% 0%;
+    --ring: 142 71% 45%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 0 0% 25%;
-    --sidebar-primary: 0 0% 10%;
+    --sidebar-primary: 142 71% 45%;
     --sidebar-primary-foreground: 0 0% 98%;
     --sidebar-accent: 0 0% 96%;
     --sidebar-accent-foreground: 0 0% 10%;
@@ -46,17 +46,17 @@
   }
 
   .dark {
-    --background: 0 0% 0%;
+    --background: 0 0% 7%;
     --foreground: 0 0% 98%;
 
-    --card: 0 0% 0%;
+    --card: 0 0% 7%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 0%;
+    --popover: 0 0% 7%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 0%;
+    --primary: 142 71% 45%;
+    --primary-foreground: 0 0% 98%;
 
     --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 98%;
@@ -64,7 +64,7 @@
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 65%;
 
-    --accent: 0 0% 15%;
+    --accent: 221 83% 55%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -72,11 +72,11 @@
 
     --border: 0 0% 15%;
     --input: 0 0% 15%;
-    --ring: 0 0% 80%;
+    --ring: 221 83% 55%;
     
-    --sidebar-background: 0 0% 10%;
+    --sidebar-background: 0 0% 7%;
     --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 0 0% 80%;
+    --sidebar-primary: 221 83% 55%;
     --sidebar-primary-foreground: 0 0% 0%;
     --sidebar-accent: 0 0% 15%;
     --sidebar-accent-foreground: 0 0% 95%;
@@ -105,41 +105,41 @@
 
   /* Improve focus styles for better accessibility */
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-blue-600 dark:outline-blue-500;
+    @apply outline-2 outline-offset-2 outline-spotify-green dark:outline-uber-blue;
   }
 }
 
 @layer components {
   .auth-input {
-    @apply h-12 w-full rounded-xl border-gray-300 bg-white/80 px-4 text-black shadow-sm backdrop-blur-sm focus:border-mechanic-blue focus:ring-mechanic-blue text-base dark:bg-white/10 dark:text-white dark:backdrop-blur-md dark:placeholder:text-gray-400;
+    @apply h-12 w-full rounded-full border-gray-700 bg-spotify-black/70 px-4 text-white shadow-sm backdrop-blur-sm focus:border-spotify-green focus:ring-spotify-green text-base dark:bg-spotify-gray/70 dark:text-white dark:backdrop-blur-md dark:placeholder:text-spotify-text;
   }
 
   .auth-btn {
-    @apply h-12 w-full rounded-xl bg-mechanic-blue text-white font-medium shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center text-base;
+    @apply h-12 w-full rounded-full bg-spotify-green text-white font-medium shadow-md hover:bg-spotify-green/90 focus:outline-none focus:ring-2 focus:ring-spotify-green focus:ring-offset-2 transition-all duration-200 flex items-center justify-center text-base dark:bg-uber-blue dark:hover:bg-uber-blue/90 dark:focus:ring-uber-blue;
   }
 
   .auth-btn-outline {
-    @apply h-12 w-full rounded-xl border border-gray-300 bg-white/80 backdrop-blur-sm text-gray-700 font-medium shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 transition-all duration-200 dark:bg-black/30 dark:text-white dark:border-gray-600 dark:hover:bg-black/40 flex items-center justify-center text-base;
+    @apply h-12 w-full rounded-full border border-gray-700 bg-spotify-black/60 backdrop-blur-sm text-white font-medium shadow-sm hover:bg-spotify-black/80 focus:outline-none focus:ring-2 focus:ring-spotify-green focus:ring-offset-2 transition-all duration-200 dark:bg-spotify-gray/60 dark:text-white dark:border-gray-600 dark:hover:bg-spotify-gray/80 flex items-center justify-center text-base;
   }
 
   .auth-card {
-    @apply rounded-2xl bg-white/90 backdrop-blur-md shadow-xl dark:bg-gray-900/80 dark:backdrop-blur-md p-8 w-full max-w-md mx-auto;
+    @apply rounded-xl bg-spotify-light/80 backdrop-blur-md shadow-xl dark:bg-spotify-gray/80 dark:backdrop-blur-md p-8 w-full max-w-md mx-auto text-white;
   }
 
   .auth-container {
-    @apply flex min-h-screen flex-col items-center justify-center p-4 bg-gradient-to-b from-white to-gray-100 dark:from-black dark:to-gray-900 bg-auth-bg bg-cover bg-center bg-no-repeat;
+    @apply flex min-h-screen flex-col items-center justify-center p-4 bg-gradient-to-b from-spotify-black to-spotify-gray dark:from-uber-black dark:to-spotify-black bg-auth-bg bg-cover bg-center bg-no-repeat;
   }
 
   .floating-btn {
-    @apply fixed bottom-8 right-8 h-14 w-14 rounded-full bg-mechanic-blue text-white shadow-lg flex items-center justify-center hover:scale-105 transition-all duration-200;
+    @apply fixed bottom-8 right-8 h-14 w-14 rounded-full bg-spotify-green text-white shadow-lg flex items-center justify-center hover:scale-105 transition-all duration-200 dark:bg-uber-blue;
   }
 
   .role-btn {
-    @apply flex flex-col items-center justify-center p-6 rounded-xl border-2 border-transparent bg-white/80 backdrop-blur-sm shadow-md hover:border-mechanic-blue transition-all duration-200 cursor-pointer dark:bg-black/30 dark:hover:border-blue-500;
+    @apply flex flex-col items-center justify-center p-6 rounded-xl border-2 border-transparent bg-spotify-black/80 backdrop-blur-sm shadow-md hover:border-spotify-green transition-all duration-200 cursor-pointer dark:bg-spotify-gray/80 dark:hover:border-uber-blue text-white;
   }
 
   .role-btn.active {
-    @apply border-mechanic-blue bg-blue-50 dark:bg-gray-900/30 dark:border-blue-500;
+    @apply border-spotify-green bg-spotify-black/90 dark:bg-spotify-gray/90 dark:border-uber-blue;
   }
 
   .card-hover {
@@ -147,6 +147,14 @@
   }
 
   .icon-button {
-    @apply flex items-center justify-center p-2 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors;
+    @apply flex items-center justify-center p-2 rounded-full bg-spotify-light hover:bg-spotify-light/80 dark:bg-spotify-gray dark:hover:bg-spotify-gray/80 transition-colors text-white;
+  }
+
+  .spotify-card {
+    @apply bg-spotify-light/90 rounded-xl p-4 shadow-md backdrop-blur-sm border border-spotify-light dark:bg-spotify-gray/90 dark:border-spotify-gray;
+  }
+  
+  .uber-card {
+    @apply bg-white/90 rounded-xl p-4 shadow-md backdrop-blur-sm border border-gray-200 dark:bg-black/90 dark:border-gray-800;
   }
 }

@@ -7,7 +7,7 @@ const ThemeToggle = () => {
     if (typeof window !== 'undefined') {
       return document.documentElement.classList.contains('dark');
     }
-    return false;
+    return true; // Default to dark mode for Spotify-like aesthetic
   });
 
   React.useEffect(() => {
@@ -26,13 +26,13 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="fixed top-4 right-4 p-2 rounded-full bg-white/90 backdrop-blur-sm shadow-md dark:bg-black/80 text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors z-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+      className="fixed top-4 right-4 p-2 rounded-full bg-spotify-light backdrop-blur-sm shadow-md dark:bg-spotify-gray/80 text-gray-300 dark:text-spotify-text hover:bg-spotify-light/90 dark:hover:bg-spotify-gray/90 transition-colors z-10 focus:outline-none focus:ring-2 focus:ring-spotify-green focus:ring-offset-2 dark:focus:ring-offset-gray-900"
       aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
     >
       {isDarkMode ? (
-        <Sun size={20} aria-hidden="true" />
+        <Sun size={20} aria-hidden="true" className="text-spotify-green" />
       ) : (
-        <Moon size={20} aria-hidden="true" />
+        <Moon size={20} aria-hidden="true" className="text-uber-blue" />
       )}
       <span className="sr-only">{isDarkMode ? "Switch to light mode" : "Switch to dark mode"}</span>
     </button>
