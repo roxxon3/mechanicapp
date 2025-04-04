@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
+import { Button } from "@/components/ui/button";
 
 const MechanicDashboard = () => {
   const { userName, getUnreadCount } = useAuth();
@@ -42,6 +43,24 @@ const MechanicDashboard = () => {
       </header>
 
       <main className="container mx-auto p-4 pb-24">
+        {/* Hero Banner */}
+        <div className="relative rounded-xl overflow-hidden mb-6 shadow-md">
+          <img 
+            src="https://images.unsplash.com/photo-1607430749738-8612898de4bb?q=80&w=2940&auto=format&fit=crop" 
+            alt="Mechanic tools" 
+            className="w-full h-48 object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent flex items-end p-6">
+            <div className="text-white">
+              <h2 className="text-2xl font-bold mb-2">Ready to help</h2>
+              <p className="mb-4">Your expertise makes a difference</p>
+              <Button variant="accent" size="lg" className="mt-2" onClick={toggleStatus}>
+                {isOnline ? 'You are Online' : 'Go Online'}
+              </Button>
+            </div>
+          </div>
+        </div>
+
         {/* Online Status Toggle */}
         <Card className="mb-6 border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm">
           <CardHeader className="pb-2">
@@ -66,18 +85,24 @@ const MechanicDashboard = () => {
         {/* Quick Stats */}
         <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Your Stats</h2>
         <div className="grid grid-cols-3 gap-4 mb-8">
-          <div className="flex flex-col items-center p-4 bg-gray-100 dark:bg-gray-900 rounded-lg">
-            <Briefcase size={24} className="mb-2 text-black dark:text-white" />
+          <div className="flex flex-col items-center p-4 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-sm transition-all hover:shadow-md">
+            <div className="w-12 h-12 bg-uber-blue/10 rounded-full flex items-center justify-center mb-3">
+              <Briefcase size={24} className="text-uber-blue" />
+            </div>
             <span className="text-xs font-semibold text-black dark:text-white">0</span>
             <span className="text-xs text-center text-gray-500 dark:text-gray-400">Jobs Today</span>
           </div>
-          <div className="flex flex-col items-center p-4 bg-gray-100 dark:bg-gray-900 rounded-lg">
-            <UserCheck size={24} className="mb-2 text-black dark:text-white" />
+          <div className="flex flex-col items-center p-4 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-sm transition-all hover:shadow-md">
+            <div className="w-12 h-12 bg-uber-blue/10 rounded-full flex items-center justify-center mb-3">
+              <UserCheck size={24} className="text-uber-blue" />
+            </div>
             <span className="text-xs font-semibold text-black dark:text-white">0</span>
             <span className="text-xs text-center text-gray-500 dark:text-gray-400">Completed</span>
           </div>
-          <div className="flex flex-col items-center p-4 bg-gray-100 dark:bg-gray-900 rounded-lg">
-            <CreditCard size={24} className="mb-2 text-black dark:text-white" />
+          <div className="flex flex-col items-center p-4 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-sm transition-all hover:shadow-md">
+            <div className="w-12 h-12 bg-uber-blue/10 rounded-full flex items-center justify-center mb-3">
+              <CreditCard size={24} className="text-uber-blue" />
+            </div>
             <span className="text-xs font-semibold text-black dark:text-white">$0</span>
             <span className="text-xs text-center text-gray-500 dark:text-gray-400">Earnings</span>
           </div>
@@ -86,9 +111,19 @@ const MechanicDashboard = () => {
         {/* Nearby Requests */}
         <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Nearby Requests</h2>
         <Card className="mb-6 border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm">
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-center flex-col py-6">
-              <MapPin size={48} className="text-gray-400 mb-4" />
+          <CardHeader>
+            <CardTitle className="text-base text-black dark:text-white">No nearby requests</CardTitle>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <div className="rounded-lg overflow-hidden mb-4">
+              <img 
+                src="https://images.unsplash.com/photo-1550089479-fe5e8a4438e0?q=80&w=2940&auto=format&fit=crop" 
+                alt="Map view" 
+                className="w-full h-40 object-cover"
+              />
+            </div>
+            <div className="flex items-center justify-center flex-col py-2">
+              <MapPin size={24} className="text-gray-400 mb-2" />
               <p className="text-gray-600 dark:text-gray-400 text-center">
                 No nearby requests at the moment. New job requests will appear here.
               </p>
@@ -100,11 +135,20 @@ const MechanicDashboard = () => {
         <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Active Jobs</h2>
         <Card className="mb-6 border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm">
           <CardContent className="pt-6">
-            <div className="flex items-center justify-center flex-col py-6">
-              <Wrench size={48} className="text-gray-400 mb-4" />
-              <p className="text-gray-600 dark:text-gray-400 text-center">
-                No active jobs. Jobs you've accepted will appear here.
-              </p>
+            <div className="flex items-center mb-4">
+              <div className="mr-4">
+                <img 
+                  src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?q=80&w=2787&auto=format&fit=crop" 
+                  alt="Car repair" 
+                  className="w-20 h-20 object-cover rounded-lg opacity-50"
+                />
+              </div>
+              <div className="flex flex-col justify-center flex-grow">
+                <Wrench size={24} className="text-gray-400 mb-2" />
+                <p className="text-gray-600 dark:text-gray-400">
+                  No active jobs. Jobs you've accepted will appear here.
+                </p>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -113,14 +157,41 @@ const MechanicDashboard = () => {
         <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Recent Activity</h2>
         <Card className="mb-6 border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm">
           <CardContent className="pt-6">
-            <div className="flex items-center justify-center flex-col py-6">
-              <Clock size={48} className="text-gray-400 mb-4" />
-              <p className="text-gray-600 dark:text-gray-400 text-center">
-                No recent activity. Your job history will appear here.
-              </p>
+            <div className="flex items-center mb-4">
+              <div className="mr-4">
+                <img 
+                  src="https://images.unsplash.com/photo-1517994112540-009c47ea476b?q=80&w=2940&auto=format&fit=crop" 
+                  alt="History" 
+                  className="w-20 h-20 object-cover rounded-lg opacity-50"
+                />
+              </div>
+              <div className="flex flex-col justify-center flex-grow">
+                <Clock size={24} className="text-gray-400 mb-2" />
+                <p className="text-gray-600 dark:text-gray-400">
+                  No recent activity. Your job history will appear here.
+                </p>
+              </div>
             </div>
           </CardContent>
         </Card>
+        
+        {/* Mechanic Tips */}
+        <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Mechanic Tips</h2>
+        <div className="bg-gray-100 dark:bg-gray-900 rounded-xl p-5 mb-8">
+          <div className="flex items-start mb-4">
+            <div className="flex-shrink-0 mr-4">
+              <div className="w-10 h-10 bg-uber-blue rounded-full flex items-center justify-center text-white font-medium">
+                <Wrench size={16} />
+              </div>
+            </div>
+            <div>
+              <h4 className="font-medium text-black dark:text-white">Quick Response Time</h4>
+              <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">
+                "Accepting requests quickly increases your chances of getting more jobs and better ratings."
+              </p>
+            </div>
+          </div>
+        </div>
       </main>
 
       {/* Bottom Navigation */}
