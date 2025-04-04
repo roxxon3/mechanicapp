@@ -5,10 +5,11 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { 
   Car, MapPin, Camera, Clock, 
   History, Settings, MessageSquare, CreditCard, 
-  LogOut, Search, ChevronLeft
+  LogOut, Search, ChevronLeft, Shield, Tool
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
+import { Button } from "@/components/ui/button";
 
 const UserDashboard = () => {
   const { userName, getUnreadCount } = useAuth();
@@ -37,37 +38,78 @@ const UserDashboard = () => {
       </header>
 
       <main className="container mx-auto p-4 pb-24">
-        {/* Request Assistance Card */}
-        <Card className="mb-6 border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm">
-          <CardHeader>
-            <CardTitle className="text-xl text-black dark:text-white">Need help?</CardTitle>
-            <CardDescription className="text-gray-600 dark:text-gray-400">
-              Request roadside assistance
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <button className="w-full py-3 bg-black dark:bg-white text-white dark:text-black font-medium rounded-lg flex items-center justify-center">
-              <MapPin size={18} className="mr-2" />
-              Request Assistance
-            </button>
-          </CardContent>
-        </Card>
+        {/* Hero Banner */}
+        <div className="relative rounded-xl overflow-hidden mb-8 shadow-md">
+          <img 
+            src="https://images.unsplash.com/photo-1601271045403-ac348e2e3d12?q=80&w=2787&auto=format&fit=crop" 
+            alt="Roadside assistance" 
+            className="w-full h-48 object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent flex items-end p-6">
+            <div className="text-white">
+              <h2 className="text-2xl font-bold mb-2">Need help on the road?</h2>
+              <p className="mb-4">Expert mechanics are just a tap away</p>
+              <Button variant="accent" size="lg" className="mt-2">
+                <MapPin size={18} className="mr-2" />
+                Request Assistance
+              </Button>
+            </div>
+          </div>
+        </div>
 
         {/* Quick Actions */}
         <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Quick Actions</h2>
         <div className="grid grid-cols-3 gap-4 mb-8">
-          <div className="flex flex-col items-center p-4 bg-gray-100 dark:bg-gray-900 rounded-lg">
-            <Camera size={24} className="mb-2 text-black dark:text-white" />
+          <div className="flex flex-col items-center p-4 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-sm transition-all hover:shadow-md">
+            <div className="w-12 h-12 bg-uber-blue/10 rounded-full flex items-center justify-center mb-3">
+              <Camera size={24} className="text-uber-blue" />
+            </div>
             <span className="text-xs text-center text-gray-800 dark:text-gray-200">Upload Photos</span>
           </div>
-          <div className="flex flex-col items-center p-4 bg-gray-100 dark:bg-gray-900 rounded-lg">
-            <Search size={24} className="mb-2 text-black dark:text-white" />
+          <div className="flex flex-col items-center p-4 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-sm transition-all hover:shadow-md">
+            <div className="w-12 h-12 bg-uber-blue/10 rounded-full flex items-center justify-center mb-3">
+              <Search size={24} className="text-uber-blue" />
+            </div>
             <span className="text-xs text-center text-gray-800 dark:text-gray-200">Find Mechanic</span>
           </div>
-          <div className="flex flex-col items-center p-4 bg-gray-100 dark:bg-gray-900 rounded-lg">
-            <History size={24} className="mb-2 text-black dark:text-white" />
+          <div className="flex flex-col items-center p-4 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-sm transition-all hover:shadow-md">
+            <div className="w-12 h-12 bg-uber-blue/10 rounded-full flex items-center justify-center mb-3">
+              <History size={24} className="text-uber-blue" />
+            </div>
             <span className="text-xs text-center text-gray-800 dark:text-gray-200">History</span>
           </div>
+        </div>
+
+        {/* Services Section */}
+        <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Our Services</h2>
+        <div className="grid grid-cols-2 gap-4 mb-8">
+          <Card className="overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm transition-all hover:shadow-md">
+            <div className="relative h-32">
+              <img 
+                src="https://images.unsplash.com/photo-1599939571322-792a325111c2?q=80&w=2787&auto=format&fit=crop" 
+                alt="Battery Jump Start" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <CardContent className="p-4">
+              <h3 className="font-medium mb-1">Battery Jump Start</h3>
+              <p className="text-xs text-gray-600 dark:text-gray-400">Quick battery assistance</p>
+            </CardContent>
+          </Card>
+          
+          <Card className="overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm transition-all hover:shadow-md">
+            <div className="relative h-32">
+              <img 
+                src="https://images.unsplash.com/photo-1507872739765-7ad2b7b4dcb6?q=80&w=2787&auto=format&fit=crop" 
+                alt="Tire Change" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <CardContent className="p-4">
+              <h3 className="font-medium mb-1">Tire Change</h3>
+              <p className="text-xs text-gray-600 dark:text-gray-400">Fast tire replacement</p>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Current or Recent Request */}
@@ -76,25 +118,48 @@ const UserDashboard = () => {
           <CardHeader className="pb-2">
             <CardTitle className="text-lg text-black dark:text-white">No active requests</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="flex items-center">
+            <div className="mr-4">
+              <img 
+                src="https://images.unsplash.com/photo-1606577924006-27d39b132ae2?q=80&w=2787&auto=format&fit=crop" 
+                alt="Placeholder" 
+                className="w-20 h-20 object-cover rounded-lg opacity-50"
+              />
+            </div>
             <p className="text-gray-600 dark:text-gray-400 text-sm">
               You don't have any active assistance requests. Use the button above to request help when needed.
             </p>
           </CardContent>
         </Card>
 
-        {/* Past Assistance */}
-        <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Past Assistance</h2>
-        <Card className="mb-6 border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm">
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-center flex-col py-6">
-              <Clock size={48} className="text-gray-400 mb-4" />
-              <p className="text-gray-600 dark:text-gray-400 text-center">
-                No history found. Your past service requests will appear here.
+        {/* Customer Testimonials */}
+        <h2 className="text-lg font-semibold text-black dark:text-white mb-3">What Our Customers Say</h2>
+        <div className="bg-gray-100 dark:bg-gray-900 rounded-xl p-5 mb-8">
+          <div className="flex items-start mb-4">
+            <div className="flex-shrink-0 mr-4">
+              <div className="w-10 h-10 bg-uber-blue rounded-full flex items-center justify-center text-white font-medium">
+                JD
+              </div>
+            </div>
+            <div>
+              <h4 className="font-medium text-black dark:text-white">John D.</h4>
+              <div className="flex items-center text-yellow-500 mb-2">
+                ★★★★★ <span className="text-xs text-gray-600 dark:text-gray-400 ml-1">5.0</span>
+              </div>
+              <p className="text-sm text-gray-700 dark:text-gray-300">
+                "The mechanic arrived within 20 minutes and had my car running again in no time. Great service!"
               </p>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
+
+        {/* Trusted by Badge */}
+        <div className="flex items-center justify-center bg-gray-50 dark:bg-gray-900/50 rounded-xl p-4 mb-6">
+          <Shield size={24} className="text-uber-blue mr-3" />
+          <p className="text-sm font-medium text-gray-800 dark:text-gray-200">
+            Trusted by over 10,000 vehicle owners nationwide
+          </p>
+        </div>
       </main>
 
       {/* Bottom Navigation */}
