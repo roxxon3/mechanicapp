@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { 
   Car, MapPin, Camera, Clock, 
   History, Settings, MessageSquare, CreditCard, 
-  LogOut, Search, ChevronLeft, Shield, Tool
+  LogOut, Search, ChevronLeft, Shield, Wrench
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
