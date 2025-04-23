@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -28,8 +27,12 @@ const MechanicDashboard = () => {
       <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-black p-4 sticky top-0 z-10">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-4">
-            <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
-              <Wrench size={20} className="text-black dark:text-white" />
+            <div className="h-10 w-10 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
+              <img
+                src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=80&q=80&auto=format&fit=crop"
+                alt="Mechanic"
+                className="object-cover w-10 h-10"
+              />
             </div>
             <div>
               <h1 className="text-xl font-bold text-black dark:text-white">Hi, {userName}</h1>
@@ -46,7 +49,7 @@ const MechanicDashboard = () => {
         {/* Hero Banner */}
         <div className="relative rounded-xl overflow-hidden mb-6 shadow-md">
           <img 
-            src="https://images.unsplash.com/photo-1607430749738-8612898de4bb?q=80&w=2940&auto=format&fit=crop" 
+            src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=1080&auto=format&fit=crop" 
             alt="Mechanic tools" 
             className="w-full h-48 object-cover"
           />
@@ -117,7 +120,7 @@ const MechanicDashboard = () => {
           <CardContent className="pt-0">
             <div className="rounded-lg overflow-hidden mb-4">
               <img 
-                src="https://images.unsplash.com/photo-1550089479-fe5e8a4438e0?q=80&w=2940&auto=format&fit=crop" 
+                src="https://images.unsplash.com/photo-1517994112540-009c47ea476b?q=80&w=2940&auto=format&fit=crop" 
                 alt="Map view" 
                 className="w-full h-40 object-cover"
               />

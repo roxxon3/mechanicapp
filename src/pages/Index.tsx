@@ -9,7 +9,17 @@ const Index = () => {
   return (
     <div className="auth-container">
       <ThemeToggle />
+      {/* Hero Image */}
       <div className="flex flex-col items-center justify-center w-full max-w-lg mx-auto">
+        {/* Boost: Hero banner */}
+        <div className="w-full rounded-xl overflow-hidden mb-8 shadow-lg animate-fade-in">
+          <img
+            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1080&auto=format&fit=crop"
+            alt="Woman standing next to broken car"
+            className="w-full h-48 object-cover"
+          />
+        </div>
+
         <div className="mb-8 animate-fade-in text-center">
           <div className="flex items-center justify-center mb-6">
             <MapPin size={48} className="text-uber-blue mr-3" />
@@ -22,8 +32,15 @@ const Index = () => {
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10 mb-12">
+            {/* Rider Card */}
             <div className="uber-card p-6 flex flex-col items-center transition-all hover:shadow-lg">
-              <Car size={48} className="text-uber-blue mb-4" />
+              {/* Friendly vehicle owner image */}
+              <img
+                src="https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?w=400&q=80&auto=format&fit=crop"
+                alt="Happy driver"
+                className="mb-4 rounded-full w-20 h-20 object-cover shadow"
+              />
+              <Car size={38} className="text-uber-blue mb-2" />
               <h2 className="text-xl font-semibold mb-2 text-black dark:text-white">
                 I Need Help With My Vehicle
               </h2>
@@ -37,8 +54,14 @@ const Index = () => {
               </Link>
             </div>
             
+            {/* Mechanic Card */}
             <div className="uber-card p-6 flex flex-col items-center transition-all hover:shadow-lg">
-              <Wrench size={48} className="text-uber-blue mb-4" />
+              <img
+                src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=400&q=80&auto=format&fit=crop"
+                alt="Mechanic at work"
+                className="mb-4 rounded-full w-20 h-20 object-cover shadow"
+              />
+              <Wrench size={38} className="text-uber-blue mb-2" />
               <h2 className="text-xl font-semibold mb-2 text-black dark:text-white">
                 I'm a Mechanic
               </h2>
