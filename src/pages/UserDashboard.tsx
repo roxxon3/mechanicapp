@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,6 +9,7 @@ import {
 import ThemeToggle from "@/components/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 const USER_AVATAR =
   "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=80&auto=format&fit=crop";
@@ -21,30 +21,42 @@ const TESTIMONIAL_AVATAR =
   "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?q=80&w=80&auto=format&fit=crop";
 
 const IndexUserDashboard = () => {
-  const { userName, getUnreadCount } = useAuth();
+  const { userName, getUnreadCount, logout } = useAuth();
   const unreadCount = getUnreadCount();
   
+  const handleLogout = () => {
+    logout();
+    toast.success("Logged out successfully", {
+      description: "See you next time!"
+    });
+  };
+
   return (
     <div className="min-h-screen bg-white dark:bg-black">
-      <ThemeToggle />
-      
-      {/* Header with user info */}
-      <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-black p-4 sticky top-0 z-10">
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-4">
-            {/* Avatar with friendly user photo */}
-            <div className="h-10 w-10 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
-              <img
-                src={USER_AVATAR}
-                alt="User"
-                className="object-cover w-10 h-10"
-              />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-black dark:text-white">Hi, {userName}</h1>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Vehicle Owner</p>
-            </div>
+      <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-black p-4 sticky top-0 z-10 flex justify-between items-center">
+        <div className="flex items-center space-x-4">
+          <div className="h-10 w-10 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
+            <img
+              src={USER_AVATAR}
+              alt="User"
+              className="object-cover w-10 h-10"
+            />
           </div>
+          <div>
+            <h1 className="text-xl font-bold text-black dark:text-white">Hi, {userName}</h1>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Vehicle Owner</p>
+          </div>
+        </div>
+        <div className="flex items-center space-x-2">
+          <ThemeToggle />
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={handleLogout}
+            className="hover:bg-red-50 dark:hover:bg-red-950"
+          >
+            <LogOut size={20} className="text-red-500" />
+          </Button>
           <Link to="/settings" className="p-2">
             <Settings size={20} className="text-black dark:text-white" />
           </Link>
@@ -52,7 +64,6 @@ const IndexUserDashboard = () => {
       </header>
 
       <main className="container mx-auto p-4 pb-24">
-        {/* Hero Banner */}
         <div className="relative rounded-xl overflow-hidden mb-8 shadow-md">
           <img 
             src={USER_HERO} 
@@ -71,30 +82,27 @@ const IndexUserDashboard = () => {
           </div>
         </div>
 
-        {/* Quick Actions */}
         <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Quick Actions</h2>
         <div className="grid grid-cols-3 gap-4 mb-8">
-          <div className="flex flex-col items-center p-4 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-sm transition-all hover:shadow-md">
-            <div className="w-12 h-12 bg-uber-blue/10 rounded-full flex items-center justify-center mb-3">
-              <Camera size={24} className="text-uber-blue" />
+          {[
+            { icon: Camera, title: "Upload Vehicle Photos", bg: "bg-blue-50 dark:bg-blue-900" },
+            { icon: Search, title: "Find Nearby Mechanic", bg: "bg-green-50 dark:bg-green-900" },
+            { icon: History, title: "Service History", bg: "bg-purple-50 dark:bg-purple-900" }
+          ].map((action) => (
+            <div 
+              key={action.title}
+              className={`flex flex-col items-center p-4 ${action.bg} rounded-lg shadow-sm transition-all hover:scale-105 hover:shadow-md`}
+            >
+              <div className="w-12 h-12 flex items-center justify-center mb-3">
+                <action.icon size={24} className="text-primary" />
+              </div>
+              <span className="text-xs text-center text-gray-800 dark:text-gray-200">
+                {action.title}
+              </span>
             </div>
-            <span className="text-xs text-center text-gray-800 dark:text-gray-200">Upload Photos</span>
-          </div>
-          <div className="flex flex-col items-center p-4 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-sm transition-all hover:shadow-md">
-            <div className="w-12 h-12 bg-uber-blue/10 rounded-full flex items-center justify-center mb-3">
-              <Search size={24} className="text-uber-blue" />
-            </div>
-            <span className="text-xs text-center text-gray-800 dark:text-gray-200">Find Mechanic</span>
-          </div>
-          <div className="flex flex-col items-center p-4 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-sm transition-all hover:shadow-md">
-            <div className="w-12 h-12 bg-uber-blue/10 rounded-full flex items-center justify-center mb-3">
-              <History size={24} className="text-uber-blue" />
-            </div>
-            <span className="text-xs text-center text-gray-800 dark:text-gray-200">History</span>
-          </div>
+          ))}
         </div>
 
-        {/* Services Section */}
         <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Our Services</h2>
         <div className="grid grid-cols-2 gap-4 mb-8">
           <Card className="overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm transition-all hover:shadow-md">
@@ -126,7 +134,6 @@ const IndexUserDashboard = () => {
           </Card>
         </div>
 
-        {/* Current or Recent Request */}
         <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Current Request</h2>
         <Card className="mb-6 border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm">
           <CardHeader className="pb-2">
@@ -146,7 +153,6 @@ const IndexUserDashboard = () => {
           </CardContent>
         </Card>
 
-        {/* Customer Testimonials */}
         <h2 className="text-lg font-semibold text-black dark:text-white mb-3">What Our Customers Say</h2>
         <div className="bg-gray-100 dark:bg-gray-900 rounded-xl p-5 mb-8">
           <div className="flex items-start mb-4">
@@ -169,7 +175,6 @@ const IndexUserDashboard = () => {
           </div>
         </div>
 
-        {/* Trusted by Badge */}
         <div className="flex items-center justify-center bg-gray-50 dark:bg-gray-900/50 rounded-xl p-4 mb-6">
           <Shield size={24} className="text-uber-blue mr-3" />
           <p className="text-sm font-medium text-gray-800 dark:text-gray-200">
@@ -178,30 +183,28 @@ const IndexUserDashboard = () => {
         </div>
       </main>
 
-      {/* Bottom Navigation */}
       <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-black border-t border-gray-200 dark:border-gray-800 py-2">
         <div className="container mx-auto flex justify-around">
-          <Link to="/user-dashboard" className="flex flex-col items-center p-2">
-            <Car size={20} className="text-black dark:text-white" />
-            <span className="text-xs mt-1 text-black dark:text-white">Home</span>
-          </Link>
-          <Link to="/history" className="flex flex-col items-center p-2">
-            <History size={20} className="text-gray-500 dark:text-gray-400" />
-            <span className="text-xs mt-1 text-gray-500 dark:text-gray-400">History</span>
-          </Link>
-          <Link to="/notifications" className="flex flex-col items-center p-2 relative">
-            <MessageSquare size={20} className="text-gray-500 dark:text-gray-400" />
-            {unreadCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-                {unreadCount}
-              </span>
-            )}
-            <span className="text-xs mt-1 text-gray-500 dark:text-gray-400">Messages</span>
-          </Link>
-          <Link to="/payments" className="flex flex-col items-center p-2">
-            <CreditCard size={20} className="text-gray-500 dark:text-gray-400" />
-            <span className="text-xs mt-1 text-gray-500 dark:text-gray-400">Payments</span>
-          </Link>
+          {[
+            { icon: Car, title: "Home", link: "/user-dashboard", active: true },
+            { icon: History, title: "History", link: "/history" },
+            { icon: MessageSquare, title: "Messages", link: "/notifications", badge: unreadCount },
+            { icon: CreditCard, title: "Payments", link: "/payments" }
+          ].map((nav) => (
+            <Link 
+              key={nav.title} 
+              to={nav.link} 
+              className={`flex flex-col items-center p-2 relative ${nav.active ? 'text-primary' : 'text-gray-500 dark:text-gray-400'}`}
+            >
+              <nav.icon size={20} />
+              {nav.badge && nav.badge > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                  {nav.badge}
+                </span>
+              )}
+              <span className="text-xs mt-1">{nav.title}</span>
+            </Link>
+          ))}
         </div>
       </div>
     </div>
@@ -209,4 +212,3 @@ const IndexUserDashboard = () => {
 };
 
 export default IndexUserDashboard;
-
