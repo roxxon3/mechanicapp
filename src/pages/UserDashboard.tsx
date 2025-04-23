@@ -11,7 +11,16 @@ import ThemeToggle from "@/components/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 
-const UserDashboard = () => {
+const USER_AVATAR =
+  "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=80&auto=format&fit=crop";
+
+const USER_HERO =
+  "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?q=80&w=1080&auto=format&fit=crop";
+
+const TESTIMONIAL_AVATAR =
+  "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?q=80&w=80&auto=format&fit=crop";
+
+const IndexUserDashboard = () => {
   const { userName, getUnreadCount } = useAuth();
   const unreadCount = getUnreadCount();
   
@@ -26,7 +35,7 @@ const UserDashboard = () => {
             {/* Avatar with friendly user photo */}
             <div className="h-10 w-10 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
               <img
-                src="https://images.unsplash.com/photo-1465379944081-7f47de8d74ac?q=80&w=80&auto=format&fit=crop"
+                src={USER_AVATAR}
                 alt="User"
                 className="object-cover w-10 h-10"
               />
@@ -46,8 +55,8 @@ const UserDashboard = () => {
         {/* Hero Banner */}
         <div className="relative rounded-xl overflow-hidden mb-8 shadow-md">
           <img 
-            src="https://images.unsplash.com/photo-1452378174528-3090a4bba7b2?q=80&w=1080&auto=format&fit=crop" 
-            alt="Roadside car requiring assistance" 
+            src={USER_HERO} 
+            alt="User with laptop at home" 
             className="w-full h-48 object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent flex items-end p-6">
@@ -142,9 +151,11 @@ const UserDashboard = () => {
         <div className="bg-gray-100 dark:bg-gray-900 rounded-xl p-5 mb-8">
           <div className="flex items-start mb-4">
             <div className="flex-shrink-0 mr-4">
-              <div className="w-10 h-10 bg-uber-blue rounded-full flex items-center justify-center text-white font-medium">
-                JD
-              </div>
+              <img
+                src={TESTIMONIAL_AVATAR}
+                alt="John D. testimonial"
+                className="w-10 h-10 rounded-full object-cover"
+              />
             </div>
             <div>
               <h4 className="font-medium text-black dark:text-white">John D.</h4>
@@ -197,4 +208,5 @@ const UserDashboard = () => {
   );
 };
 
-export default UserDashboard;
+export default IndexUserDashboard;
+

@@ -11,6 +11,13 @@ import ThemeToggle from "@/components/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 
+const MECHANIC_AVATAR =
+  "https://images.unsplash.com/photo-1493962853295-0fd70327578a?q=80&w=80&auto=format&fit=crop";
+const MECHANIC_HERO =
+  "https://images.unsplash.com/photo-1452378174528-3090a4bba7b2?q=80&w=1080&auto=format&fit=crop";
+const MECHANIC_TIP =
+  "https://images.unsplash.com/photo-1465379944081-7f47de8d74ac?q=80&w=120&auto=format&fit=crop";
+
 const MechanicDashboard = () => {
   const { userName, getUnreadCount } = useAuth();
   const [isOnline, setIsOnline] = useState(true);
@@ -30,7 +37,7 @@ const MechanicDashboard = () => {
           <div className="flex items-center space-x-4">
             <div className="h-10 w-10 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
               <img
-                src="https://images.unsplash.com/photo-1493962853295-0fd70327578a?q=80&w=80&auto=format&fit=crop"
+                src={MECHANIC_AVATAR}
                 alt="Mechanic"
                 className="object-cover w-10 h-10"
               />
@@ -50,8 +57,8 @@ const MechanicDashboard = () => {
         {/* Hero Banner */}
         <div className="relative rounded-xl overflow-hidden mb-6 shadow-md">
           <img 
-            src="https://images.unsplash.com/photo-1493962853295-0fd70327578a?q=80&w=1080&auto=format&fit=crop" 
-            alt="Mechanic tools on workbench" 
+            src={MECHANIC_HERO} 
+            alt="Mechanic behind fence" 
             className="w-full h-48 object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent flex items-end p-6">
@@ -59,7 +66,7 @@ const MechanicDashboard = () => {
               <h2 className="text-2xl font-bold mb-2">Ready to help</h2>
               <p className="mb-4">Your expertise makes a difference</p>
               <Button variant="accent" size="lg" className="mt-2" onClick={toggleStatus}>
-                {isOnline ? 'You are Online' : 'Go Online'}
+                {isOnline ? "You are Online" : "Go Online"}
               </Button>
             </div>
           </div>
@@ -69,19 +76,19 @@ const MechanicDashboard = () => {
         <Card className="mb-6 border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-xl text-black dark:text-white">
-              You are currently {isOnline ? 'Online' : 'Offline'}
+              You are currently {isOnline ? "Online" : "Offline"}
             </CardTitle>
             <CardDescription className="text-gray-600 dark:text-gray-400">
-              {isOnline ? 'You can receive job requests' : 'You will not receive job requests'}
+              {isOnline ? "You can receive job requests" : "You will not receive job requests"}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <button 
               onClick={toggleStatus}
-              className={`w-full py-3 ${isOnline ? 'bg-green-600' : 'bg-gray-500'} text-white font-medium rounded-lg flex items-center justify-center`}
+              className={`w-full py-3 ${isOnline ? "bg-green-600" : "bg-gray-500"} text-white font-medium rounded-lg flex items-center justify-center`}
             >
               <ToggleLeft size={18} className="mr-2" />
-              {isOnline ? 'Go Offline' : 'Go Online'}
+              {isOnline ? "Go Offline" : "Go Online"}
             </button>
           </CardContent>
         </Card>
@@ -142,7 +149,7 @@ const MechanicDashboard = () => {
             <div className="flex items-center mb-4">
               <div className="mr-4">
                 <img 
-                  src="https://images.unsplash.com/photo-1465379944081-7f47de8d74ac?q=80&w=120&auto=format&fit=crop" 
+                  src={MECHANIC_TIP}
                   alt="Empty mechanic job"
                   className="w-20 h-20 object-cover rounded-lg opacity-50"
                 />
@@ -184,9 +191,11 @@ const MechanicDashboard = () => {
         <div className="bg-gray-100 dark:bg-gray-900 rounded-xl p-5 mb-8">
           <div className="flex items-start mb-4">
             <div className="flex-shrink-0 mr-4">
-              <div className="w-10 h-10 bg-uber-blue rounded-full flex items-center justify-center text-white font-medium">
-                <Wrench size={16} />
-              </div>
+              <img
+                src={MECHANIC_TIP}
+                alt="Mechanic giving a tip"
+                className="w-10 h-10 rounded-full object-cover"
+              />
             </div>
             <div>
               <h4 className="font-medium text-black dark:text-white">Quick Response Time</h4>
@@ -229,3 +238,4 @@ const MechanicDashboard = () => {
 };
 
 export default MechanicDashboard;
+
