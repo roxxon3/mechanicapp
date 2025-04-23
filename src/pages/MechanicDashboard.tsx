@@ -1,15 +1,15 @@
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
   Wrench, MapPin, Clock, History, Settings, 
   MessageSquare, CreditCard, LogOut, BellRing,
-  UserCheck, Briefcase, ChevronLeft, ToggleLeft, Camera
+  UserCheck, Briefcase, ChevronLeft, ToggleLeft
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 
 const MECHANIC_AVATAR =
   "https://images.unsplash.com/photo-1493962853295-0fd70327578a?q=80&w=80&auto=format&fit=crop";
@@ -19,26 +19,19 @@ const MECHANIC_TIP =
   "https://images.unsplash.com/photo-1465379944081-7f47de8d74ac?q=80&w=120&auto=format&fit=crop";
 
 const MechanicDashboard = () => {
-  const { userName, getUnreadCount, vehiclePhotos, logout } = useAuth();
+  const { userName, getUnreadCount } = useAuth();
   const [isOnline, setIsOnline] = useState(true);
   const unreadCount = getUnreadCount();
   
   const toggleStatus = () => {
     setIsOnline(!isOnline);
-    toast.success(isOnline ? "You're now offline" : "You're now online", {
-      description: isOnline ? "You will not receive job requests" : "You can now receive job requests"
-    });
-  };
-  
-  const handleLogout = () => {
-    logout();
-    toast.success("Logged out successfully", {
-      description: "See you next time!"
-    });
   };
   
   return (
     <div className="min-h-screen bg-white dark:bg-black">
+      <ThemeToggle />
+      
+      {/* Header with mechanic info */}
       <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-black p-4 sticky top-0 z-10">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-4">
@@ -54,20 +47,9 @@ const MechanicDashboard = () => {
               <p className="text-sm text-gray-600 dark:text-gray-400">Mechanic</p>
             </div>
           </div>
-          <div className="flex items-center space-x-2">
-            <ThemeToggle />
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={handleLogout}
-              className="hover:bg-red-50 dark:hover:bg-red-950"
-            >
-              <LogOut size={20} className="text-red-500" />
-            </Button>
-            <Link to="/settings" className="p-2">
-              <Settings size={20} className="text-black dark:text-white" />
-            </Link>
-          </div>
+          <Link to="/settings" className="p-2">
+            <Settings size={20} className="text-black dark:text-white" />
+          </Link>
         </div>
       </header>
 
@@ -136,42 +118,6 @@ const MechanicDashboard = () => {
             <span className="text-xs text-center text-gray-500 dark:text-gray-400">Earnings</span>
           </div>
         </div>
-
-        {/* Customer Vehicle Photos */}
-        <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Customer Vehicle Photos</h2>
-        <Card className="mb-6 border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm">
-          <CardContent className="pt-6">
-            {vehiclePhotos.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {vehiclePhotos.map((photo, index) => (
-                  <div key={index} className="rounded-lg overflow-hidden">
-                    <img 
-                      src={photo} 
-                      alt={`Vehicle problem ${index + 1}`}
-                      className="w-full h-48 object-cover"
-                    />
-                    <div className="p-2 bg-gray-50 dark:bg-gray-900">
-                      <p className="text-xs text-gray-500 dark:text-gray-400">
-                        Uploaded {index === 0 ? 'just now' : `${index + 1} days ago`}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="flex items-center mb-4">
-                <div className="mr-4">
-                  <Camera size={48} className="text-gray-400" />
-                </div>
-                <div className="flex flex-col justify-center flex-grow">
-                  <p className="text-gray-600 dark:text-gray-400">
-                    No vehicle photos yet. User uploaded photos will appear here.
-                  </p>
-                </div>
-              </div>
-            )}
-          </CardContent>
-        </Card>
 
         {/* Nearby Requests */}
         <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Nearby Requests</h2>
@@ -292,3 +238,4 @@ const MechanicDashboard = () => {
 };
 
 export default MechanicDashboard;
+

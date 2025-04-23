@@ -1,182 +1,168 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
-// Define message type
+type UserRole = "user" | "mechanic" | null;
+
+// Define message structure
 export interface Message {
   id: string;
   senderId: string;
-  senderName: string;
-  senderRole?: string;
   receiverId: string;
+  senderName: string;
+  senderRole: UserRole;
   content: string;
   timestamp: Date;
   read: boolean;
 }
 
-// Define auth context type
 interface AuthContextType {
   isAuthenticated: boolean;
+  userRole: UserRole;
+  userId: string;
   userName: string;
-  userRole: "user" | "mechanic" | null;
-  messages: Message[];
-  vehiclePhotos: string[];
-  login: (email: string, password: string) => void;
-  signup: (name: string, email: string, password: string) => void;
+  login: (role: UserRole, name?: string) => void;
   logout: () => void;
-  getUnreadCount: () => number;
+  messages: Message[];
   sendMessage: (receiverId: string, receiverName: string, content: string) => void;
+  getUnreadCount: () => number;
   markAsRead: (messageId: string) => void;
-  addVehiclePhoto: (photoUrl: string) => void;
 }
 
-// Create the context
-const AuthContext = createContext<AuthContextType>({
-  isAuthenticated: false,
-  userName: "",
-  userRole: null,
-  messages: [],
-  vehiclePhotos: [],
-  login: () => {},
-  signup: () => {},
-  logout: () => {},
-  getUnreadCount: () => 0,
-  sendMessage: () => {},
-  markAsRead: () => {},
-  addVehiclePhoto: () => {},
-});
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Provider component
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [userRole, setUserRole] = useState<"user" | "mechanic" | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [userRole, setUserRole] = useState<UserRole>(null);
+  const [userId, setUserId] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
-  const [vehiclePhotos, setVehiclePhotos] = useState<string[]>([]);
-  const navigate = useNavigate();
 
-  // Load auth state from localStorage on initial render
+  // Check if user is already logged in when the component mounts
   useEffect(() => {
-    const savedAuth = localStorage.getItem("auth");
-    const savedMessages = localStorage.getItem("messages");
-    const savedPhotos = localStorage.getItem("vehiclePhotos");
+    const storedAuth = localStorage.getItem("isAuthenticated");
+    const storedRole = localStorage.getItem("userRole") as UserRole;
+    const storedUserId = localStorage.getItem("userId");
+    const storedUserName = localStorage.getItem("userName");
+    const storedMessages = localStorage.getItem("messages");
     
-    if (savedAuth) {
-      const authData = JSON.parse(savedAuth);
+    if (storedAuth === "true" && storedRole) {
       setIsAuthenticated(true);
-      setUserName(authData.userName);
-      setUserRole(authData.userRole);
+      setUserRole(storedRole);
+      setUserId(storedUserId || generateUserId());
+      setUserName(storedUserName || (storedRole === "user" ? "John" : "Mike"));
     }
-    
-    if (savedMessages) {
-      setMessages(JSON.parse(savedMessages));
-    } else {
-      // Add some initial messages if none exist
-      const initialMessages: Message[] = [
-        {
-          id: "msg1",
-          senderId: userRole === "user" ? "mech12345" : "user12345",
-          senderName: userRole === "user" ? "Mike (Mechanic)" : "John (Customer)",
-          senderRole: userRole === "user" ? "mechanic" : "user",
-          receiverId: userRole === "user" ? "user12345" : "mech12345",
-          content: "Hello, I'm available to help with your vehicle issue.",
-          timestamp: new Date(),
-          read: false,
-        },
-      ];
-      setMessages(initialMessages);
-      localStorage.setItem("messages", JSON.stringify(initialMessages));
-    }
-    
-    if (savedPhotos) {
-      setVehiclePhotos(JSON.parse(savedPhotos));
+
+    if (storedMessages) {
+      try {
+        setMessages(JSON.parse(storedMessages));
+      } catch (error) {
+        console.error("Error parsing stored messages", error);
+      }
     }
   }, []);
 
-  // Save messages to localStorage whenever they change
+  // Save messages to localStorage when they change
   useEffect(() => {
     if (messages.length > 0) {
       localStorage.setItem("messages", JSON.stringify(messages));
     }
   }, [messages]);
-  
-  // Save vehicle photos to localStorage whenever they change
-  useEffect(() => {
-    if (vehiclePhotos.length > 0) {
-      localStorage.setItem("vehiclePhotos", JSON.stringify(vehiclePhotos));
-    }
-  }, [vehiclePhotos]);
 
-  const login = (email: string, password: string) => {
-    // Simple mock login - in production, you'd validate against a backend
-    if (password === "password") {
-      const userRole = email.includes("mechanic") ? "mechanic" : "user";
-      const userName = userRole === "mechanic" ? "Mike" : "John";
-      
-      // Save auth state to localStorage
-      const authData = { userName, userRole };
-      localStorage.setItem("auth", JSON.stringify(authData));
-      
-      setIsAuthenticated(true);
-      setUserName(userName);
-      setUserRole(userRole);
-      
-      if (userRole === "mechanic") {
-        navigate("/mechanic-dashboard");
-      } else {
-        navigate("/user-dashboard");
-      }
-    }
+  const generateUserId = () => {
+    return Math.random().toString(36).substring(2, 10);
   };
 
-  const signup = (name: string, email: string, password: string) => {
-    // Simple mock signup - in production, you'd send to a backend
-    const userRole = email.includes("mechanic") ? "mechanic" : "user";
-    
-    // Save auth state to localStorage
-    const authData = { userName: name, userRole };
-    localStorage.setItem("auth", JSON.stringify(authData));
-    
+  const login = (role: UserRole, name?: string) => {
+    const newUserId = generateUserId();
+    const defaultName = role === "user" ? "John" : "Mike";
+    const userName = name || defaultName;
+
     setIsAuthenticated(true);
-    setUserName(name);
-    setUserRole(userRole);
+    setUserRole(role);
+    setUserId(newUserId);
+    setUserName(userName);
     
-    if (userRole === "mechanic") {
-      navigate("/mechanic-dashboard");
-    } else {
-      navigate("/user-dashboard");
+    localStorage.setItem("isAuthenticated", "true");
+    localStorage.setItem("userRole", role || "");
+    localStorage.setItem("userId", newUserId);
+    localStorage.setItem("userName", userName);
+
+    // Add demo messages for testing
+    if (role === "user") {
+      const demoMechanicId = "mech12345";
+      setMessages([
+        {
+          id: "msg1",
+          senderId: demoMechanicId,
+          receiverId: newUserId,
+          senderName: "Mike (Mechanic)",
+          senderRole: "mechanic",
+          content: "Hello! I can help with your car issues.",
+          timestamp: new Date(Date.now() - 3600000), // 1 hour ago
+          read: false
+        }
+      ]);
+    } else if (role === "mechanic") {
+      const demoUserId = "user12345";
+      setMessages([
+        {
+          id: "msg2",
+          senderId: demoUserId,
+          receiverId: newUserId,
+          senderName: "John (Customer)",
+          senderRole: "user",
+          content: "My car won't start. Can you help?",
+          timestamp: new Date(Date.now() - 7200000), // 2 hours ago
+          read: false
+        }
+      ]);
     }
   };
 
   const logout = () => {
-    localStorage.removeItem("auth");
     setIsAuthenticated(false);
-    setUserName("");
     setUserRole(null);
-    navigate("/login");
-  };
-
-  const getUnreadCount = () => {
-    return messages.filter(msg => 
-      ((userRole === "user" && msg.senderId === "mech12345") || 
-       (userRole === "mechanic" && msg.senderId === "user12345")) && 
-      !msg.read
-    ).length;
+    setUserId("");
+    setUserName("");
+    setMessages([]);
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("messages");
   };
 
   const sendMessage = (receiverId: string, receiverName: string, content: string) => {
     const newMessage: Message = {
-      id: `msg${Date.now()}`,
-      senderId: userRole === "user" ? "user12345" : "mech12345",
-      senderName: userName,
-      senderRole: userRole,
+      id: `msg-${Date.now()}`,
+      senderId: userId,
       receiverId,
+      senderName: userName + (userRole === "user" ? " (Customer)" : " (Mechanic)"),
+      senderRole: userRole,
       content,
       timestamp: new Date(),
-      read: false,
+      read: false
     };
-    
-    setMessages(prevMessages => [...prevMessages, newMessage]);
+
+    // Add a reply message for demo purposes
+    const replyMessage: Message = {
+      id: `msg-reply-${Date.now()}`,
+      senderId: receiverId,
+      receiverId: userId,
+      senderName: receiverName,
+      senderRole: userRole === "user" ? "mechanic" : "user",
+      content: userRole === "user" 
+        ? "Thanks for your message. I'll check your car issue soon." 
+        : "Thank you for the response. When can you come to fix my car?",
+      timestamp: new Date(Date.now() + 60000), // 1 minute later
+      read: false
+    };
+
+    setMessages(prevMessages => [...prevMessages, newMessage, replyMessage]);
+  };
+
+  const getUnreadCount = () => {
+    return messages.filter(msg => !msg.read && msg.receiverId === userId).length;
   };
 
   const markAsRead = (messageId: string) => {
@@ -186,30 +172,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       )
     );
   };
-  
-  const addVehiclePhoto = (photoUrl: string) => {
-    setVehiclePhotos(prev => [photoUrl, ...prev]);
-  };
 
   return (
-    <AuthContext.Provider value={{ 
-      isAuthenticated, 
-      userName, 
-      userRole, 
-      messages, 
-      vehiclePhotos,
-      login, 
-      signup, 
-      logout, 
-      getUnreadCount,
-      sendMessage,
-      markAsRead,
-      addVehiclePhoto
-    }}>
+    <AuthContext.Provider 
+      value={{ 
+        isAuthenticated, 
+        userRole, 
+        userId,
+        userName,
+        login, 
+        logout,
+        messages,
+        sendMessage,
+        getUnreadCount,
+        markAsRead
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
 
-// Custom hook to use the auth context
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};
