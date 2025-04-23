@@ -13,6 +13,7 @@ import {
   ArrowLeft, Clock, Check, CheckCheck
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
+import { toast } from "sonner";
 
 const Notifications = () => {
   const { userRole, messages, sendMessage, markAsRead, userName } = useAuth();
@@ -87,6 +88,9 @@ const Notifications = () => {
     if (selectedChatObj) {
       sendMessage(selectedChat, selectedChatObj.name, messageText);
       setMessageText("");
+      toast.success("Message sent", {
+        description: `To: ${selectedChatObj.name}`
+      });
     }
   };
 
@@ -114,11 +118,16 @@ const Notifications = () => {
     }
   };
 
+  // Auto-scroll to bottom when new messages arrive
+  useEffect(() => {
+    const messagesContainer = document.getElementById('messages-container');
+    if (messagesContainer) {
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+  }, [messages, selectedChat]);
+
   return (
     <div className="min-h-screen bg-white dark:bg-black">
-      <ThemeToggle />
-      
-      {/* Header */}
       <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-black p-4 sticky top-0 z-10">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-4">
@@ -127,6 +136,7 @@ const Notifications = () => {
             </button>
             <h1 className="text-xl font-bold text-black dark:text-white">Messages</h1>
           </div>
+          <ThemeToggle />
         </div>
       </header>
 
@@ -203,7 +213,7 @@ const Notifications = () => {
                   </CardHeader>
                   
                   <CardContent className="flex-1 overflow-hidden p-0">
-                    <ScrollArea className="h-[calc(100vh-320px)] p-4">
+                    <ScrollArea className="h-[calc(100vh-320px)] p-4" id="messages-container">
                       <div className="space-y-4">
                         {messages
                           .filter(msg => 
