@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -25,7 +26,7 @@ const UserDashboard = () => {
             {/* Avatar with friendly user photo */}
             <div className="h-10 w-10 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
               <img
-                src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=80&q=80&auto=format&fit=crop"
+                src="https://images.unsplash.com/photo-1465379944081-7f47de8d74ac?q=80&w=80&auto=format&fit=crop"
                 alt="User"
                 className="object-cover w-10 h-10"
               />
@@ -45,8 +46,8 @@ const UserDashboard = () => {
         {/* Hero Banner */}
         <div className="relative rounded-xl overflow-hidden mb-8 shadow-md">
           <img 
-            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1080&auto=format&fit=crop" 
-            alt="Driver needs help" 
+            src="https://images.unsplash.com/photo-1452378174528-3090a4bba7b2?q=80&w=1080&auto=format&fit=crop" 
+            alt="Roadside car requiring assistance" 
             className="w-full h-48 object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent flex items-end p-6">
@@ -90,8 +91,8 @@ const UserDashboard = () => {
           <Card className="overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm transition-all hover:shadow-md">
             <div className="relative h-32">
               <img 
-                src="https://images.unsplash.com/photo-1599939571322-792a325111c2?q=80&w=2787&auto=format&fit=crop" 
-                alt="Battery Jump Start" 
+                src="https://images.unsplash.com/photo-1606577924006-27d39b132ae2?q=80&w=420&auto=format&fit=crop" 
+                alt="Battery jump start service" 
                 className="w-full h-full object-cover"
               />
             </div>
@@ -104,8 +105,8 @@ const UserDashboard = () => {
           <Card className="overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm transition-all hover:shadow-md">
             <div className="relative h-32">
               <img 
-                src="https://images.unsplash.com/photo-1507872739765-7ad2b7b4dcb6?q=80&w=2787&auto=format&fit=crop" 
-                alt="Tire Change" 
+                src="https://images.unsplash.com/photo-1507872739765-7ad2b7b4dcb6?q=80&w=420&auto=format&fit=crop" 
+                alt="Tire change service" 
                 className="w-full h-full object-cover"
               />
             </div>
@@ -125,8 +126,8 @@ const UserDashboard = () => {
           <CardContent className="flex items-center">
             <div className="mr-4">
               <img 
-                src="https://images.unsplash.com/photo-1606577924006-27d39b132ae2?q=80&w=2787&auto=format&fit=crop" 
-                alt="Placeholder" 
+                src="https://images.unsplash.com/photo-1466721591366-2d5fba72006d?q=80&w=120&auto=format&fit=crop" 
+                alt="Empty assistance state"
                 className="w-20 h-20 object-cover rounded-lg opacity-50"
               />
             </div>

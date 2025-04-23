@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -29,7 +30,7 @@ const MechanicDashboard = () => {
           <div className="flex items-center space-x-4">
             <div className="h-10 w-10 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
               <img
-                src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=80&q=80&auto=format&fit=crop"
+                src="https://images.unsplash.com/photo-1493962853295-0fd70327578a?q=80&w=80&auto=format&fit=crop"
                 alt="Mechanic"
                 className="object-cover w-10 h-10"
               />
@@ -49,8 +50,8 @@ const MechanicDashboard = () => {
         {/* Hero Banner */}
         <div className="relative rounded-xl overflow-hidden mb-6 shadow-md">
           <img 
-            src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=1080&auto=format&fit=crop" 
-            alt="Mechanic tools" 
+            src="https://images.unsplash.com/photo-1493962853295-0fd70327578a?q=80&w=1080&auto=format&fit=crop" 
+            alt="Mechanic tools on workbench" 
             className="w-full h-48 object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent flex items-end p-6">
@@ -120,8 +121,8 @@ const MechanicDashboard = () => {
           <CardContent className="pt-0">
             <div className="rounded-lg overflow-hidden mb-4">
               <img 
-                src="https://images.unsplash.com/photo-1517994112540-009c47ea476b?q=80&w=2940&auto=format&fit=crop" 
-                alt="Map view" 
+                src="https://images.unsplash.com/photo-1517994112540-009c47ea476b?q=80&w=420&auto=format&fit=crop" 
+                alt="Map mechanic area" 
                 className="w-full h-40 object-cover"
               />
             </div>
@@ -141,8 +142,8 @@ const MechanicDashboard = () => {
             <div className="flex items-center mb-4">
               <div className="mr-4">
                 <img 
-                  src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?q=80&w=2787&auto=format&fit=crop" 
-                  alt="Car repair" 
+                  src="https://images.unsplash.com/photo-1465379944081-7f47de8d74ac?q=80&w=120&auto=format&fit=crop" 
+                  alt="Empty mechanic job"
                   className="w-20 h-20 object-cover rounded-lg opacity-50"
                 />
               </div>
@@ -163,8 +164,8 @@ const MechanicDashboard = () => {
             <div className="flex items-center mb-4">
               <div className="mr-4">
                 <img 
-                  src="https://images.unsplash.com/photo-1517994112540-009c47ea476b?q=80&w=2940&auto=format&fit=crop" 
-                  alt="History" 
+                  src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=120&auto=format&fit=crop" 
+                  alt="Mechanic job history"
                   className="w-20 h-20 object-cover rounded-lg opacity-50"
                 />
               </div>

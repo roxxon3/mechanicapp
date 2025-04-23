@@ -14,8 +14,8 @@ const Index = () => {
         {/* Boost: Hero banner */}
         <div className="w-full rounded-xl overflow-hidden mb-8 shadow-lg animate-fade-in">
           <img
-            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1080&auto=format&fit=crop"
-            alt="Woman standing next to broken car"
+            src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=1080&auto=format&fit=crop"
+            alt="Mechanic holding a wrench near a car"
             className="w-full h-48 object-cover"
           />
         </div>
@@ -36,8 +36,8 @@ const Index = () => {
             <div className="uber-card p-6 flex flex-col items-center transition-all hover:shadow-lg">
               {/* Friendly vehicle owner image */}
               <img
-                src="https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?w=400&q=80&auto=format&fit=crop"
-                alt="Happy driver"
+                src="https://images.unsplash.com/photo-1466721591366-2d5fba72006d?q=80&w=400&auto=format&fit=crop"
+                alt="Car owner beside a car"
                 className="mb-4 rounded-full w-20 h-20 object-cover shadow"
               />
               <Car size={38} className="text-uber-blue mb-2" />
@@ -57,8 +57,8 @@ const Index = () => {
             {/* Mechanic Card */}
             <div className="uber-card p-6 flex flex-col items-center transition-all hover:shadow-lg">
               <img
-                src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=400&q=80&auto=format&fit=crop"
-                alt="Mechanic at work"
+                src="https://images.unsplash.com/photo-1493962853295-0fd70327578a?q=80&w=400&auto=format&fit=crop"
+                alt="Mechanic in uniform with tools"
                 className="mb-4 rounded-full w-20 h-20 object-cover shadow"
               />
               <Wrench size={38} className="text-uber-blue mb-2" />
