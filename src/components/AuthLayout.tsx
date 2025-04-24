@@ -18,7 +18,7 @@ const AuthLayout = ({ children, className }: AuthLayoutProps) => {
         <div className="mb-8">
           <Link to="/" className="block">
             <h1 className="text-3xl font-bold text-center text-black dark:text-white">
-              Mechanic Hub
+              MECH-ASSIST
             </h1>
           </Link>
           <p className="text-center text-gray-600 dark:text-gray-300 mt-2 text-base">
@@ -56,3 +56,4 @@ const AuthLayout = ({ children, className }: AuthLayoutProps) => {
 };
 
 export default AuthLayout;
+

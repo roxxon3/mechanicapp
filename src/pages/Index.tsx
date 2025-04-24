@@ -24,7 +24,7 @@ const Index = () => {
           <div className="flex items-center justify-center mb-6">
             <MapPin size={48} className="text-uber-blue mr-3" />
             <h1 className="text-4xl font-bold text-center text-black dark:text-white">
-              Mechanic Hub
+              MECH-ASSIST
             </h1>
           </div>
           <p className="text-xl text-center text-gray-600 dark:text-gray-300 mb-10">
@@ -100,3 +100,4 @@ const Index = () => {
 };
 
 export default Index;
+
