@@ -5,7 +5,15 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 
-const DUMMY_MECHANICS = [
+// Define the mechanic type with proper coordinates typing
+interface Mechanic {
+  id: number;
+  name: string;
+  coordinates: [number, number]; // This ensures it's a tuple with exactly 2 elements
+  rating: number;
+}
+
+const DUMMY_MECHANICS: Mechanic[] = [
   { id: 1, name: "Mike's Auto", coordinates: [-74.006, 40.7128], rating: 4.8 },
   { id: 2, name: "Quick Fix Motors", coordinates: [-73.986, 40.7428], rating: 4.5 },
   { id: 3, name: "Pro Mechanics", coordinates: [-74.026, 40.7328], rating: 4.9 },
@@ -30,7 +38,7 @@ const MechanicsMap = ({ onClose }: MechanicsMapProps) => {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v12',
-      center: [-74.006, 40.7128], // Default to NYC coordinates
+      center: [-74.006, 40.7128] as [number, number], // Type assertion to ensure proper type
       zoom: 12
     });
 
@@ -51,6 +59,7 @@ const MechanicsMap = ({ onClose }: MechanicsMapProps) => {
           </div>
         `);
 
+      // Use the properly typed coordinates
       new mapboxgl.Marker(markerElement)
         .setLngLat(mechanic.coordinates)
         .setPopup(popup)
