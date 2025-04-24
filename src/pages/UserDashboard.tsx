@@ -11,6 +11,7 @@ import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import PhotoUpload from "@/components/PhotoUpload";
+import MechanicsMap from "@/components/MechanicsMap";
 
 const USER_AVATAR =
   "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=80&auto=format&fit=crop";
@@ -25,6 +26,7 @@ const IndexUserDashboard = () => {
   const { userName, getUnreadCount, logout, sendMessage } = useAuth();
   const unreadCount = getUnreadCount();
   const [showPhotoUpload, setShowPhotoUpload] = useState(false);
+  const [showMap, setShowMap] = useState(false);
   
   const handleLogout = () => {
     logout();
@@ -107,22 +109,27 @@ const IndexUserDashboard = () => {
               Upload Vehicle Photos
             </span>
           </div>
-          {[
-            { icon: Search, title: "Find Nearby Mechanic", bg: "bg-green-50 dark:bg-green-900" },
-            { icon: History, title: "Service History", bg: "bg-purple-50 dark:bg-purple-900" }
-          ].map((action) => (
-            <div 
-              key={action.title}
-              className={`flex flex-col items-center p-4 ${action.bg} rounded-lg shadow-sm transition-all hover:scale-105 hover:shadow-md`}
-            >
-              <div className="w-12 h-12 flex items-center justify-center mb-3">
-                <action.icon size={24} className="text-primary" />
-              </div>
-              <span className="text-xs text-center text-gray-800 dark:text-gray-200">
-                {action.title}
-              </span>
+          <div 
+            onClick={() => setShowMap(true)}
+            className="flex flex-col items-center p-4 bg-green-50 dark:bg-green-900 rounded-lg shadow-sm transition-all hover:scale-105 hover:shadow-md cursor-pointer"
+          >
+            <div className="w-12 h-12 flex items-center justify-center mb-3">
+              <Search size={24} className="text-primary" />
             </div>
-          ))}
+            <span className="text-xs text-center text-gray-800 dark:text-gray-200">
+              Find Nearby Mechanic
+            </span>
+          </div>
+          <div 
+            className="flex flex-col items-center p-4 bg-purple-50 dark:bg-purple-900 rounded-lg shadow-sm transition-all hover:scale-105 hover:shadow-md"
+          >
+            <div className="w-12 h-12 flex items-center justify-center mb-3">
+              <History size={24} className="text-primary" />
+            </div>
+            <span className="text-xs text-center text-gray-800 dark:text-gray-200">
+              Service History
+            </span>
+          </div>
         </div>
 
         {showPhotoUpload && (
@@ -143,6 +150,8 @@ const IndexUserDashboard = () => {
           </div>
         )}
 
+        {showMap && <MechanicsMap onClose={() => setShowMap(false)} />}
+        
         <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Our Services</h2>
         <div className="grid grid-cols-2 gap-4 mb-8">
           <Card className="overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm transition-all hover:shadow-md">
