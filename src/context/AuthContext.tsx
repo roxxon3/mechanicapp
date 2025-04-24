@@ -1,9 +1,8 @@
-
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 type UserRole = "user" | "mechanic" | null;
 
-// Define message structure
+// Define message and photo structures
 export interface Message {
   id: string;
   senderId: string;
@@ -13,6 +12,7 @@ export interface Message {
   content: string;
   timestamp: Date;
   read: boolean;
+  photo?: string;
 }
 
 interface AuthContextType {
@@ -23,7 +23,7 @@ interface AuthContextType {
   login: (role: UserRole, name?: string) => void;
   logout: () => void;
   messages: Message[];
-  sendMessage: (receiverId: string, receiverName: string, content: string) => void;
+  sendMessage: (receiverId: string, receiverName: string, content: string, photo?: string) => void;
   getUnreadCount: () => number;
   markAsRead: (messageId: string) => void;
 }
@@ -132,7 +132,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     localStorage.removeItem("messages");
   };
 
-  const sendMessage = (receiverId: string, receiverName: string, content: string) => {
+  const sendMessage = (receiverId: string, receiverName: string, content: string, photo?: string) => {
     const newMessage: Message = {
       id: `msg-${Date.now()}`,
       senderId: userId,
@@ -141,7 +141,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       senderRole: userRole,
       content,
       timestamp: new Date(),
-      read: false
+      read: false,
+      photo
     };
 
     // Add a reply message for demo purposes
@@ -152,7 +153,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       senderName: receiverName,
       senderRole: userRole === "user" ? "mechanic" : "user",
       content: userRole === "user" 
-        ? "Thanks for your message. I'll check your car issue soon." 
+        ? "Thanks for sharing the photo. I'll check your car issue soon." 
         : "Thank you for the response. When can you come to fix my car?",
       timestamp: new Date(Date.now() + 60000), // 1 minute later
       read: false

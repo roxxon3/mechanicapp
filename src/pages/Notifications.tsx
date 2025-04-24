@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth, Message } from "@/context/AuthContext";
@@ -21,12 +20,10 @@ const Notifications = () => {
   const [chats, setChats] = useState<{id: string, name: string, role: string, lastMessage: string}[]>([]);
   const navigate = useNavigate();
 
-  // Organize messages into chats
   useEffect(() => {
     const chatMap = new Map();
     
     messages.forEach(message => {
-      // If we sent the message, track the receiver as the chat person
       if (message.senderId === "user12345" || message.senderId === "mech12345") {
         const chatPersonId = message.receiverId;
         const chatPersonName = userRole === "user" ? "Mike (Mechanic)" : "John (Customer)";
@@ -44,10 +41,7 @@ const Notifications = () => {
           chatMap.get(chatPersonId).lastMessage = message.content;
           chatMap.get(chatPersonId).timestamp = message.timestamp;
         }
-      }
-      
-      // If we received the message, track the sender as the chat person
-      else {
+      } else {
         const chatPersonId = message.senderId;
         const chatPersonName = message.senderName;
         const chatPersonRole = message.senderRole;
@@ -67,19 +61,16 @@ const Notifications = () => {
       }
     });
     
-    // Convert map to array and sort by timestamp
     const chatArray = Array.from(chatMap.values());
     chatArray.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
     
     setChats(chatArray);
     
-    // If no chat is selected and we have chats, select the first one
     if (!selectedChat && chatArray.length > 0) {
       setSelectedChat(chatArray[0].id);
     }
   }, [messages, selectedChat, userRole]);
 
-  // Handle sending a new message
   const handleSendMessage = () => {
     if (!messageText.trim() || !selectedChat) return;
     
@@ -90,7 +81,6 @@ const Notifications = () => {
     }
   };
 
-  // Mark messages as read when viewed
   useEffect(() => {
     if (selectedChat) {
       messages
@@ -99,13 +89,11 @@ const Notifications = () => {
     }
   }, [selectedChat, messages, markAsRead]);
 
-  // Format timestamp
   const formatTime = (timestamp: Date) => {
     const date = new Date(timestamp);
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
-  // Navigate back
   const handleBack = () => {
     if (userRole === "user") {
       navigate("/user-dashboard");
@@ -118,7 +106,6 @@ const Notifications = () => {
     <div className="min-h-screen bg-white dark:bg-black">
       <ThemeToggle />
       
-      {/* Header */}
       <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-black p-4 sticky top-0 z-10">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-4">
@@ -132,7 +119,6 @@ const Notifications = () => {
 
       <main className="container mx-auto p-4 pb-24">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* Conversation List */}
           <div className="md:col-span-1">
             <Card className="border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm h-[calc(100vh-180px)]">
               <CardHeader className="pb-2">
@@ -183,7 +169,6 @@ const Notifications = () => {
             </Card>
           </div>
 
-          {/* Chat Window */}
           <div className="md:col-span-2">
             <Card className="border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm h-[calc(100vh-180px)] flex flex-col">
               {selectedChat && chats.find(chat => chat.id === selectedChat) ? (
@@ -220,6 +205,13 @@ const Notifications = () => {
                                     ? 'bg-black text-white dark:bg-white dark:text-black rounded-br-none' 
                                     : 'bg-gray-100 text-black dark:bg-gray-800 dark:text-gray-100 rounded-bl-none'
                                 }`}>
+                                  {message.photo && (
+                                    <img 
+                                      src={message.photo} 
+                                      alt="Car issue" 
+                                      className="rounded-lg mb-2 max-w-full h-auto"
+                                    />
+                                  )}
                                   <p className="text-sm">{message.content}</p>
                                   <div className={`flex items-center justify-end mt-1 space-x-1 text-xs ${
                                     isSentByMe ? 'text-gray-300 dark:text-gray-600' : 'text-gray-500'

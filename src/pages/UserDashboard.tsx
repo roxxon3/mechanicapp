@@ -10,6 +10,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import PhotoUpload from "@/components/PhotoUpload";
 
 const USER_AVATAR =
   "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=80&auto=format&fit=crop";
@@ -21,14 +22,25 @@ const TESTIMONIAL_AVATAR =
   "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?q=80&w=80&auto=format&fit=crop";
 
 const IndexUserDashboard = () => {
-  const { userName, getUnreadCount, logout } = useAuth();
+  const { userName, getUnreadCount, logout, sendMessage } = useAuth();
   const unreadCount = getUnreadCount();
+  const [showPhotoUpload, setShowPhotoUpload] = useState(false);
   
   const handleLogout = () => {
     logout();
     toast.success("Logged out successfully", {
       description: "See you next time!"
     });
+  };
+
+  const handlePhotoUpload = (photoData: string) => {
+    sendMessage(
+      "mech12345", 
+      "Mike (Mechanic)", 
+      "Here's a photo of my car issue.", 
+      photoData
+    );
+    setShowPhotoUpload(false);
   };
 
   return (
@@ -84,8 +96,18 @@ const IndexUserDashboard = () => {
 
         <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Quick Actions</h2>
         <div className="grid grid-cols-3 gap-4 mb-8">
+          <div 
+            onClick={() => setShowPhotoUpload(true)}
+            className="flex flex-col items-center p-4 bg-blue-50 dark:bg-blue-900 rounded-lg shadow-sm transition-all hover:scale-105 hover:shadow-md cursor-pointer"
+          >
+            <div className="w-12 h-12 flex items-center justify-center mb-3">
+              <Camera size={24} className="text-primary" />
+            </div>
+            <span className="text-xs text-center text-gray-800 dark:text-gray-200">
+              Upload Vehicle Photos
+            </span>
+          </div>
           {[
-            { icon: Camera, title: "Upload Vehicle Photos", bg: "bg-blue-50 dark:bg-blue-900" },
             { icon: Search, title: "Find Nearby Mechanic", bg: "bg-green-50 dark:bg-green-900" },
             { icon: History, title: "Service History", bg: "bg-purple-50 dark:bg-purple-900" }
           ].map((action) => (
@@ -102,6 +124,24 @@ const IndexUserDashboard = () => {
             </div>
           ))}
         </div>
+
+        {showPhotoUpload && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-lg">
+              <h3 className="text-lg font-semibold mb-4 text-black dark:text-white">
+                Upload Car Issue Photo
+              </h3>
+              <PhotoUpload onPhotoSelect={handlePhotoUpload} />
+              <Button 
+                variant="outline" 
+                className="mt-4"
+                onClick={() => setShowPhotoUpload(false)}
+              >
+                Cancel
+              </Button>
+            </div>
+          </div>
+        )}
 
         <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Our Services</h2>
         <div className="grid grid-cols-2 gap-4 mb-8">
