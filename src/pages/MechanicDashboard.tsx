@@ -1,11 +1,10 @@
-
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
   Wrench, MapPin, Clock, History, Settings, 
   MessageSquare, CreditCard, LogOut, BellRing,
-  UserCheck, Briefcase, ChevronLeft, ToggleLeft
+  UserCheck, Briefcase, ArrowLeft, ToggleLeft
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
@@ -22,6 +21,7 @@ const MechanicDashboard = () => {
   const { userName, getUnreadCount } = useAuth();
   const [isOnline, setIsOnline] = useState(true);
   const unreadCount = getUnreadCount();
+  const navigate = useNavigate();
   
   const toggleStatus = () => {
     setIsOnline(!isOnline);
@@ -31,18 +31,13 @@ const MechanicDashboard = () => {
     <div className="min-h-screen bg-white dark:bg-black">
       <ThemeToggle />
       
-      {/* Header with mechanic info */}
       <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-black p-4 sticky top-0 z-10">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-4">
-            <div className="h-10 w-10 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
-              <img
-                src={MECHANIC_AVATAR}
-                alt="Mechanic"
-                className="object-cover w-10 h-10"
-              />
-            </div>
-            <div>
+            <Button variant="ghost" size="icon" onClick={() => navigate('/')}>
+              <ArrowLeft size={20} className="text-black dark:text-white" />
+            </Button>
+            <div className="flex flex-col">
               <h1 className="text-xl font-bold text-black dark:text-white">Hi, {userName}</h1>
               <p className="text-sm text-gray-600 dark:text-gray-400">Mechanic</p>
             </div>
@@ -54,7 +49,6 @@ const MechanicDashboard = () => {
       </header>
 
       <main className="container mx-auto p-4 pb-24">
-        {/* Hero Banner */}
         <div className="relative rounded-xl overflow-hidden mb-6 shadow-md">
           <img 
             src={MECHANIC_HERO} 
@@ -72,7 +66,6 @@ const MechanicDashboard = () => {
           </div>
         </div>
 
-        {/* Online Status Toggle */}
         <Card className="mb-6 border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-xl text-black dark:text-white">
@@ -93,7 +86,6 @@ const MechanicDashboard = () => {
           </CardContent>
         </Card>
 
-        {/* Quick Stats */}
         <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Your Stats</h2>
         <div className="grid grid-cols-3 gap-4 mb-8">
           <div className="flex flex-col items-center p-4 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-sm transition-all hover:shadow-md">
@@ -119,7 +111,6 @@ const MechanicDashboard = () => {
           </div>
         </div>
 
-        {/* Nearby Requests */}
         <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Nearby Requests</h2>
         <Card className="mb-6 border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm">
           <CardHeader>
@@ -142,7 +133,6 @@ const MechanicDashboard = () => {
           </CardContent>
         </Card>
 
-        {/* Active Jobs */}
         <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Active Jobs</h2>
         <Card className="mb-6 border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm">
           <CardContent className="pt-6">
@@ -164,7 +154,6 @@ const MechanicDashboard = () => {
           </CardContent>
         </Card>
 
-        {/* Recent Activity */}
         <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Recent Activity</h2>
         <Card className="mb-6 border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm">
           <CardContent className="pt-6">
@@ -186,7 +175,6 @@ const MechanicDashboard = () => {
           </CardContent>
         </Card>
         
-        {/* Mechanic Tips */}
         <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Mechanic Tips</h2>
         <div className="bg-gray-100 dark:bg-gray-900 rounded-xl p-5 mb-8">
           <div className="flex items-start mb-4">
@@ -207,7 +195,6 @@ const MechanicDashboard = () => {
         </div>
       </main>
 
-      {/* Bottom Navigation */}
       <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-black border-t border-gray-200 dark:border-gray-800 py-2">
         <div className="container mx-auto flex justify-around">
           <Link to="/mechanic-dashboard" className="flex flex-col items-center p-2">
@@ -238,4 +225,3 @@ const MechanicDashboard = () => {
 };
 
 export default MechanicDashboard;
-

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
   Car, MapPin, Camera, Clock, 
   History, Settings, MessageSquare, CreditCard, 
-  LogOut, Search, ChevronLeft, Shield, Wrench
+  LogOut, Search, ChevronLeft, Shield, Wrench, ArrowLeft
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
@@ -24,6 +24,7 @@ const TESTIMONIAL_AVATAR =
 
 const IndexUserDashboard = () => {
   const { userName, getUnreadCount, logout, sendMessage } = useAuth();
+  const navigate = useNavigate();
   const unreadCount = getUnreadCount();
   const [showPhotoUpload, setShowPhotoUpload] = useState(false);
   const [showMap, setShowMap] = useState(false);
@@ -49,13 +50,9 @@ const IndexUserDashboard = () => {
     <div className="min-h-screen bg-white dark:bg-black">
       <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-black p-4 sticky top-0 z-10 flex justify-between items-center">
         <div className="flex items-center space-x-4">
-          <div className="h-10 w-10 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
-            <img
-              src={USER_AVATAR}
-              alt="User"
-              className="object-cover w-10 h-10"
-            />
-          </div>
+          <Button variant="ghost" size="icon" onClick={() => navigate('/')}>
+            <ArrowLeft size={20} className="text-black dark:text-white" />
+          </Button>
           <div>
             <h1 className="text-xl font-bold text-black dark:text-white">Hi, {userName}</h1>
             <p className="text-sm text-gray-600 dark:text-gray-400">Vehicle Owner</p>

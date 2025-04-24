@@ -1,15 +1,14 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
+import { ArrowLeft } from 'lucide-react';
 
-// Define the mechanic type with proper coordinates typing
 interface Mechanic {
   id: number;
   name: string;
-  coordinates: [number, number]; // This ensures it's a tuple with exactly 2 elements
+  coordinates: [number, number];
   rating: number;
 }
 
@@ -34,18 +33,15 @@ const MechanicsMap = ({ onClose }: MechanicsMapProps) => {
     
     mapboxgl.accessToken = apiKey;
     
-    // Initialize map
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v12',
-      center: [-74.006, 40.7128] as [number, number], // Type assertion to ensure proper type
+      center: [-74.006, 40.7128] as [number, number],
       zoom: 12
     });
 
-    // Add navigation controls
     map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
 
-    // Add markers for mechanics
     DUMMY_MECHANICS.forEach(mechanic => {
       const markerElement = document.createElement('div');
       markerElement.className = 'flex items-center justify-center w-8 h-8 bg-primary text-white rounded-full cursor-pointer hover:bg-primary/90';
@@ -59,7 +55,6 @@ const MechanicsMap = ({ onClose }: MechanicsMapProps) => {
           </div>
         `);
 
-      // Use the properly typed coordinates
       new mapboxgl.Marker(markerElement)
         .setLngLat(mechanic.coordinates)
         .setPopup(popup)
@@ -81,7 +76,12 @@ const MechanicsMap = ({ onClose }: MechanicsMapProps) => {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
       <div className="bg-background rounded-lg p-6 w-full max-w-4xl">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-semibold">Nearby Mechanics</h2>
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="icon" onClick={onClose}>
+              <ArrowLeft size={20} />
+            </Button>
+            <h2 className="text-2xl font-semibold">Nearby Mechanics</h2>
+          </div>
           <Button variant="ghost" onClick={onClose}>✕</Button>
         </div>
         
