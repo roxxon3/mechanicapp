@@ -1,10 +1,11 @@
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
   Car, MapPin, Camera, Clock, 
   History, Settings, MessageSquare, CreditCard, 
-  LogOut, Search, ChevronLeft, Shield, Wrench, ArrowLeft
+  LogOut, Search, ChevronLeft, Shield, Wrench, ArrowLeft, Map
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
@@ -85,10 +86,21 @@ const IndexUserDashboard = () => {
             <div className="text-white">
               <h2 className="text-2xl font-bold mb-2">Need help on the road?</h2>
               <p className="mb-4">Expert mechanics are just a tap away</p>
-              <Button variant="accent" size="lg" className="mt-2">
-                <MapPin size={18} className="mr-2" />
-                Request Assistance
-              </Button>
+              <div className="flex flex-wrap gap-3">
+                <Button variant="accent" size="lg" className="mt-2">
+                  <MapPin size={18} className="mr-2" />
+                  Request Assistance
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="mt-2 bg-white/20 backdrop-blur-sm border-white/40 hover:bg-white/30"
+                  onClick={() => setShowMap(true)}
+                >
+                  <Map size={18} className="mr-2" />
+                  View Area Map
+                </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -111,7 +123,7 @@ const IndexUserDashboard = () => {
             className="flex flex-col items-center p-4 bg-green-50 dark:bg-green-900 rounded-lg shadow-sm transition-all hover:scale-105 hover:shadow-md cursor-pointer"
           >
             <div className="w-12 h-12 flex items-center justify-center mb-3">
-              <Search size={24} className="text-primary" />
+              <Map size={24} className="text-primary" />
             </div>
             <span className="text-xs text-center text-gray-800 dark:text-gray-200">
               Find Nearby Mechanic
@@ -136,18 +148,42 @@ const IndexUserDashboard = () => {
                 Upload Car Issue Photo
               </h3>
               <PhotoUpload onPhotoSelect={handlePhotoUpload} />
-              <Button 
-                variant="outline" 
-                className="mt-4"
-                onClick={() => setShowPhotoUpload(false)}
-              >
-                Cancel
-              </Button>
+              <div className="flex justify-end gap-3 mt-4">
+                <Button 
+                  variant="outline" 
+                  onClick={() => setShowPhotoUpload(false)}
+                >
+                  Cancel
+                </Button>
+                <Button variant="default">
+                  Upload
+                </Button>
+              </div>
             </div>
           </div>
         )}
 
         {showMap && <MechanicsMap onClose={() => setShowMap(false)} />}
+        
+        <h2 className="text-lg font-semibold text-black dark:text-white mb-3">View Map</h2>
+        <Card 
+          className="mb-6 border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm overflow-hidden"
+          onClick={() => setShowMap(true)}
+        >
+          <div className="relative h-48 cursor-pointer">
+            <img 
+              src="https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?q=80&w=1000&auto=format&fit=crop" 
+              alt="Map view" 
+              className="w-full h-full object-cover transition-transform hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+              <Button variant="outline" className="bg-white/70 backdrop-blur-sm hover:bg-white/90">
+                <Map size={18} className="mr-2" />
+                Open Full Map
+              </Button>
+            </div>
+          </div>
+        </Card>
         
         <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Our Services</h2>
         <div className="grid grid-cols-2 gap-4 mb-8">

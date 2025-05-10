@@ -1,14 +1,16 @@
+
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
   Wrench, MapPin, Clock, History, Settings, 
   MessageSquare, CreditCard, LogOut, BellRing,
-  UserCheck, Briefcase, ArrowLeft, ToggleLeft
+  UserCheck, Briefcase, ArrowLeft, ToggleLeft, Map
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
+import MechanicsMap from "@/components/MechanicsMap";
 
 const MECHANIC_AVATAR =
   "https://images.unsplash.com/photo-1493962853295-0fd70327578a?q=80&w=80&auto=format&fit=crop";
@@ -20,6 +22,7 @@ const MECHANIC_TIP =
 const MechanicDashboard = () => {
   const { userName, getUnreadCount } = useAuth();
   const [isOnline, setIsOnline] = useState(true);
+  const [showMap, setShowMap] = useState(false);
   const unreadCount = getUnreadCount();
   const navigate = useNavigate();
   
@@ -59,9 +62,20 @@ const MechanicDashboard = () => {
             <div className="text-white">
               <h2 className="text-2xl font-bold mb-2">Ready to help</h2>
               <p className="mb-4">Your expertise makes a difference</p>
-              <Button variant="accent" size="lg" className="mt-2" onClick={toggleStatus}>
-                {isOnline ? "You are Online" : "Go Online"}
-              </Button>
+              <div className="flex flex-wrap gap-3">
+                <Button variant="accent" size="lg" className="mt-2" onClick={toggleStatus}>
+                  {isOnline ? "You are Online" : "Go Online"}
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="mt-2 bg-white/20 backdrop-blur-sm border-white/40 hover:bg-white/30"
+                  onClick={() => setShowMap(true)}
+                >
+                  <Map size={18} className="mr-2" />
+                  View Area Map
+                </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -117,12 +131,18 @@ const MechanicDashboard = () => {
             <CardTitle className="text-base text-black dark:text-white">No nearby requests</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
-            <div className="rounded-lg overflow-hidden mb-4">
+            <div className="rounded-lg overflow-hidden mb-4 relative cursor-pointer" onClick={() => setShowMap(true)}>
               <img 
                 src="https://images.unsplash.com/photo-1517994112540-009c47ea476b?q=80&w=420&auto=format&fit=crop" 
                 alt="Map mechanic area" 
-                className="w-full h-40 object-cover"
+                className="w-full h-40 object-cover transition-transform hover:scale-105"
               />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Button variant="outline" className="bg-white/70 backdrop-blur-sm hover:bg-white/90">
+                  <Map size={18} className="mr-2" />
+                  View Full Map
+                </Button>
+              </div>
             </div>
             <div className="flex items-center justify-center flex-col py-2">
               <MapPin size={24} className="text-gray-400 mb-2" />
@@ -220,6 +240,8 @@ const MechanicDashboard = () => {
           </Link>
         </div>
       </div>
+
+      {showMap && <MechanicsMap onClose={() => setShowMap(false)} />}
     </div>
   );
 };

@@ -48,8 +48,8 @@ const Index = () => {
                 Get roadside assistance when you need it most
               </p>
               <Link to="/signup" className="w-full">
-                <Button variant="uber" size="xl" className="w-full">
-                  Get Started <ArrowRight size={18} />
+                <Button variant="uber" size="xl" className="w-full flex items-center justify-center">
+                  Get Started <ArrowRight size={18} className="ml-2" />
                 </Button>
               </Link>
             </div>
@@ -69,8 +69,8 @@ const Index = () => {
                 Offer your services and grow your customer base
               </p>
               <Link to="/signup" className="w-full">
-                <Button variant="uber" size="xl" className="w-full">
-                  Join Now <ArrowRight size={18} />
+                <Button variant="uber" size="xl" className="w-full flex items-center justify-center">
+                  Join Now <ArrowRight size={18} className="ml-2" />
                 </Button>
               </Link>
             </div>
@@ -92,6 +92,25 @@ const Index = () => {
                 className="w-full h-32 object-cover rounded-lg mb-3"
               />
               <h3 className="font-semibold text-black dark:text-white">24/7 Emergency Service</h3>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4 mb-8">
+            <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
+              <img
+                src="https://images.unsplash.com/photo-1620285327296-f71539349429?q=80&w=400&auto=format&fit=crop"
+                alt="Engine repair"
+                className="w-full h-32 object-cover rounded-lg mb-3"
+              />
+              <h3 className="font-semibold text-black dark:text-white">Engine Repair</h3>
+            </div>
+            <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
+              <img
+                src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?q=80&w=400&auto=format&fit=crop"
+                alt="Transmission service"
+                className="w-full h-32 object-cover rounded-lg mb-3"
+              />
+              <h3 className="font-semibold text-black dark:text-white">Transmission Service</h3>
             </div>
           </div>
 
