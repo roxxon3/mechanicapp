@@ -1,7 +1,8 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "@/components/ThemeToggle";
-import { ArrowRight, Car, Wrench, HelpCircle, MapPin, Engine } from "lucide-react";
+import { ArrowRight, Car, Wrench, HelpCircle, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
@@ -21,7 +22,7 @@ const Index = () => {
 
         <div className="mb-8 animate-fade-in text-center">
           <div className="flex items-center justify-center mb-6">
-            <Engine size={48} className="text-uber-blue mr-3" />
+            <Car size={48} className="text-uber-blue mr-3" />
             <h1 className="text-4xl font-bold text-center text-black dark:text-white">
               MECH-ASSIST
             </h1>
