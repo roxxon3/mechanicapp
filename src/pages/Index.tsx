@@ -1,8 +1,7 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "@/components/ThemeToggle";
-import { ArrowRight, Car, Wrench, HelpCircle, MapPin, Shield, Clock, Tool } from "lucide-react";
+import { ArrowRight, Car, Wrench, HelpCircle, MapPin, Shield, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
@@ -142,7 +141,7 @@ const Index = () => {
               </div>
               <div className="flex flex-col items-center">
                 <div className="bg-gray-100 dark:bg-gray-800 rounded-full p-4 mb-4">
-                  <Tool size={32} className="text-uber-blue" />
+                  <Wrench size={32} className="text-uber-blue" />
                 </div>
                 <img 
                   src="https://images.unsplash.com/photo-1622186477895-f2af6a0f5a97?q=80&w=300&auto=format&fit=crop"
