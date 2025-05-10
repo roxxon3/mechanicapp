@@ -13,6 +13,7 @@ import MechanicDashboard from "./pages/MechanicDashboard";
 import Notifications from "./pages/Notifications";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Payment from "./pages/Payment";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <Notifications />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/payment" 
+              element={
+                <ProtectedRoute>
+                  <Payment />
                 </ProtectedRoute>
               } 
             />

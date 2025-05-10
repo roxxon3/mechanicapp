@@ -1,11 +1,10 @@
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
   Car, MapPin, Camera, Clock, 
   History, Settings, MessageSquare, CreditCard, 
-  LogOut, Search, ChevronLeft, Shield, Wrench, ArrowLeft, Map
+  LogOut, Search, ChevronLeft, Shield, Wrench, ArrowLeft, Map, BadgeDollarSign
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
@@ -106,7 +105,7 @@ const IndexUserDashboard = () => {
         </div>
 
         <h2 className="text-lg font-semibold text-black dark:text-white mb-3">Quick Actions</h2>
-        <div className="grid grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-4 gap-4 mb-8">
           <div 
             onClick={() => setShowPhotoUpload(true)}
             className="flex flex-col items-center p-4 bg-blue-50 dark:bg-blue-900 rounded-lg shadow-sm transition-all hover:scale-105 hover:shadow-md cursor-pointer"
@@ -130,7 +129,7 @@ const IndexUserDashboard = () => {
             </span>
           </div>
           <div 
-            className="flex flex-col items-center p-4 bg-purple-50 dark:bg-purple-900 rounded-lg shadow-sm transition-all hover:scale-105 hover:shadow-md"
+            className="flex flex-col items-center p-4 bg-purple-50 dark:bg-purple-900 rounded-lg shadow-sm transition-all hover:scale-105 hover:shadow-md cursor-pointer"
           >
             <div className="w-12 h-12 flex items-center justify-center mb-3">
               <History size={24} className="text-primary" />
@@ -139,6 +138,17 @@ const IndexUserDashboard = () => {
               Service History
             </span>
           </div>
+          <Link
+            to="/payment" 
+            className="flex flex-col items-center p-4 bg-amber-50 dark:bg-amber-900 rounded-lg shadow-sm transition-all hover:scale-105 hover:shadow-md cursor-pointer"
+          >
+            <div className="w-12 h-12 flex items-center justify-center mb-3">
+              <BadgeDollarSign size={24} className="text-primary" />
+            </div>
+            <span className="text-xs text-center text-gray-800 dark:text-gray-200">
+              Make Payment
+            </span>
+          </Link>
         </div>
 
         {showPhotoUpload && (
@@ -271,7 +281,7 @@ const IndexUserDashboard = () => {
             { icon: Car, title: "Home", link: "/user-dashboard", active: true },
             { icon: History, title: "History", link: "/history" },
             { icon: MessageSquare, title: "Messages", link: "/notifications", badge: unreadCount },
-            { icon: CreditCard, title: "Payments", link: "/payments" }
+            { icon: CreditCard, title: "Payments", link: "/payment" }
           ].map((nav) => (
             <Link 
               key={nav.title} 
