@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "@/components/ThemeToggle";
-import { ArrowRight, Car, Wrench, HelpCircle, MapPin } from "lucide-react";
+import { ArrowRight, Car, Wrench, HelpCircle, MapPin, Shield, Clock, Tool } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
@@ -114,6 +114,68 @@ const Index = () => {
             </div>
           </div>
 
+          {/* New section with customer journey images */}
+          <div className="mt-12 mb-10">
+            <h2 className="text-2xl font-bold mb-6 text-black dark:text-white">How It Works</h2>
+            <div className="grid grid-cols-3 gap-4">
+              <div className="flex flex-col items-center">
+                <div className="bg-gray-100 dark:bg-gray-800 rounded-full p-4 mb-4">
+                  <MapPin size={32} className="text-uber-blue" />
+                </div>
+                <img 
+                  src="https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=300&auto=format&fit=crop"
+                  alt="Driver with broken down car"
+                  className="w-full h-24 object-cover rounded-lg mb-3"
+                />
+                <h3 className="text-sm font-semibold">Request Service</h3>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="bg-gray-100 dark:bg-gray-800 rounded-full p-4 mb-4">
+                  <Clock size={32} className="text-uber-blue" />
+                </div>
+                <img 
+                  src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?q=80&w=300&auto=format&fit=crop"
+                  alt="Mechanic arriving"
+                  className="w-full h-24 object-cover rounded-lg mb-3"
+                />
+                <h3 className="text-sm font-semibold">Quick Response</h3>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="bg-gray-100 dark:bg-gray-800 rounded-full p-4 mb-4">
+                  <Tool size={32} className="text-uber-blue" />
+                </div>
+                <img 
+                  src="https://images.unsplash.com/photo-1622186477895-f2af6a0f5a97?q=80&w=300&auto=format&fit=crop"
+                  alt="Car being fixed"
+                  className="w-full h-24 object-cover rounded-lg mb-3"
+                />
+                <h3 className="text-sm font-semibold">Problem Fixed</h3>
+              </div>
+            </div>
+          </div>
+
+          {/* Testimonials with images */}
+          <div className="mt-12 mb-10">
+            <h2 className="text-2xl font-bold mb-6 text-black dark:text-white">Customer Reviews</h2>
+            <div className="grid grid-cols-1 gap-4">
+              <div className="bg-gray-50 dark:bg-gray-900 p-6 rounded-lg flex items-start">
+                <img 
+                  src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=100&auto=format&fit=crop"
+                  alt="Customer portrait"
+                  className="w-12 h-12 rounded-full object-cover mr-4"
+                />
+                <div className="text-left">
+                  <div className="flex text-yellow-500 mb-2">★★★★★</div>
+                  <p className="text-gray-700 dark:text-gray-300 italic mb-2">
+                    "My car broke down on the highway and within 15 minutes, a mechanic arrived. 
+                    Outstanding service!"
+                  </p>
+                  <p className="font-semibold text-black dark:text-white">Sarah K.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="mt-8">
             <p className="mb-4 text-base text-gray-600 dark:text-gray-300">
               Already have an account?
@@ -130,6 +192,34 @@ const Index = () => {
               <HelpCircle size={20} className="mr-2" />
               How It Works
             </Link>
+          </div>
+
+          {/* Trust indicators with image */}
+          <div className="mt-12 p-6 bg-gray-50 dark:bg-gray-900 rounded-lg">
+            <div className="flex items-center justify-center mb-4">
+              <Shield size={24} className="text-uber-blue mr-3" />
+              <h3 className="text-lg font-semibold">Trusted Service</h3>
+            </div>
+            <div className="flex flex-wrap justify-center gap-4">
+              <img 
+                src="https://images.unsplash.com/photo-1581091007718-0c50d599bfd0?q=80&w=200&auto=format&fit=crop"
+                alt="Certified mechanic"
+                className="w-24 h-24 rounded object-cover"
+              />
+              <img 
+                src="https://images.unsplash.com/photo-1597404294360-feeeda04612e?q=80&w=200&auto=format&fit=crop"
+                alt="Quality tools"
+                className="w-24 h-24 rounded object-cover"
+              />
+              <img 
+                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=200&auto=format&fit=crop"
+                alt="Satisfied customer"
+                className="w-24 h-24 rounded object-cover"
+              />
+            </div>
+            <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
+              All our mechanics are certified professionals with years of experience
+            </p>
           </div>
         </div>
       </div>
