@@ -11,6 +11,8 @@ import Signup from "./pages/Signup";
 import UserDashboard from "./pages/UserDashboard";
 import MechanicDashboard from "./pages/MechanicDashboard";
 import Notifications from "./pages/Notifications";
+import NotificationsTab from "./pages/NotificationsTab";
+import Jobs from "./pages/Jobs";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Payment from "./pages/Payment";
@@ -49,6 +51,22 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <Notifications />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/notifications-tab" 
+              element={
+                <ProtectedRoute>
+                  <NotificationsTab />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/jobs" 
+              element={
+                <ProtectedRoute>
+                  <Jobs />
                 </ProtectedRoute>
               } 
             />
